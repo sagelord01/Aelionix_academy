@@ -1,0 +1,53 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  border-radius: var(--radius-sm);
+  flex: 0 0 auto;
+}
+
+.mark {
+  display: grid;
+  grid-template-columns: repeat(2, 5px);
+  grid-template-rows: repeat(2, 5px);
+  gap: 2px;
+  width: 19px;
+  height: 19px;
+  padding: 2px;
+  border: 1px solid var(--border-strong);
+  border-radius: 5px;
+  background: var(--glass);
+}
+
+.mark span {
+  display: block;
+  background: var(--text-primary);
+  border-radius: 1px;
+  opacity: 0.9;
+}
+
+.mark span:nth-child(1) {
+  grid-column: span 2;
+}
+
+.mark span:nth-child(2) {
+  opacity: 0.55;
+}
+
+.mark span:nth-child(3) {
+  opacity: 0.35;
+}
+
+.wordmark {
+  white-space: nowrap;
+}
+
+@media (max-width: 380px) {
+  .wordmark {
+    font-size: 0.8rem;
+  }
+}

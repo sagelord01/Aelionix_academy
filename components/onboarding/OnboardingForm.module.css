@@ -1,0 +1,134 @@
+.form {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.section {
+  display: grid;
+  gap: var(--space-5);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.section:last-of-type {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.sectionLabel {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.legend {
+  padding: 0;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.choice {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+}
+
+.radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.choiceBody {
+  display: grid;
+  gap: 3px;
+  width: 100%;
+  padding: var(--space-4);
+  background: var(--glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.choice:hover .choiceBody {
+  background: var(--glass-strong);
+  border-color: var(--border);
+}
+
+.radio:checked + .choiceBody {
+  background: linear-gradient(
+      150deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.025)
+    ),
+    var(--glass);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-inset);
+}
+
+.radio:focus-visible + .choiceBody {
+  box-shadow: var(--focus-ring);
+}
+
+.choiceLabel {
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  line-height: 1.35;
+}
+
+.choiceHint {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}
+
+.note {
+  color: var(--text-faint);
+  font-size: var(--text-xs);
+  line-height: 1.6;
+  max-width: 68ch;
+}
+
+.actions {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+}
+
+.actionNote {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  line-height: 1.6;
+  max-width: 60ch;
+}
+
+@media (max-width: 720px) {
+  .choices,
+  .three {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,134 @@
+.result {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.meta {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.pass,
+.fail {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  font-size: var(--text-xs);
+}
+
+.pass {
+  color: var(--success);
+}
+
+.fail {
+  color: var(--danger);
+}
+
+.tests {
+  display: grid;
+  gap: 4px;
+}
+
+.test {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr) auto;
+  gap: var(--space-2);
+  align-items: baseline;
+  padding: var(--space-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  font-size: var(--text-xs);
+}
+
+.testPass {
+  color: var(--success);
+}
+
+.testFail {
+  color: var(--danger);
+}
+
+.testName {
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.testHidden {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.testDetail {
+  max-width: 46ch;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.hiddenNote {
+  color: var(--text-faint);
+  font-size: 0.7rem;
+  line-height: 1.55;
+}
+
+.consoleGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.consoleBlock {
+  min-width: 0;
+  padding: var(--space-2);
+  background: var(--editor-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+}
+
+.consoleLabel {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: var(--space-2);
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.consoleBlock pre {
+  max-height: 190px;
+  overflow: auto;
+  color: var(--code-text);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.consoleBlock pre.stderr {
+  color: var(--danger);
+}
+
+@media (max-width: 680px) {
+  .consoleGrid {
+    grid-template-columns: 1fr;
+  }
+}

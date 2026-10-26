@@ -1,0 +1,151 @@
+.page {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6) var(--space-6) var(--space-16);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  max-width: var(--container);
+  width: 100%;
+  margin-inline: auto;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.steps {
+  display: flex;
+  gap: 4px;
+}
+
+.step {
+  width: 26px;
+  height: 2px;
+  background: var(--border);
+}
+
+.stepOn {
+  background: var(--text-primary);
+}
+
+.layout {
+  width: 100%;
+  max-width: var(--container);
+  margin: var(--space-16) auto 0;
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.aside {
+  position: sticky;
+  top: var(--space-10);
+  display: grid;
+  gap: var(--space-5);
+}
+
+.asideTitle {
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+
+.asideBody {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+}
+
+.asideList {
+  display: grid;
+  gap: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--space-5);
+}
+
+.asideItem {
+  display: grid;
+  gap: 2px;
+}
+
+.asideItemTitle {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.asideItemBody {
+  color: var(--text-faint);
+  font-size: var(--text-xs);
+  line-height: 1.55;
+}
+
+.card {
+  max-width: 760px;
+  padding: clamp(var(--space-6), 4vw, var(--space-10));
+  background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.01) 45%
+    ),
+    var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-deep), var(--shadow-inset);
+  backdrop-filter: blur(var(--blur-strong));
+  -webkit-backdrop-filter: blur(var(--blur-strong));
+}
+
+.cardHead {
+  display: grid;
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
+}
+
+.cardHead h1 {
+  font-size: clamp(1.8rem, 3vw, 2.2rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.cardHead p {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  max-width: 58ch;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    margin-top: var(--space-10);
+  }
+
+  .aside {
+    position: static;
+  }
+
+  .asideList {
+    display: none;
+  }
+
+  .page {
+    padding-inline: var(--space-4);
+  }
+}

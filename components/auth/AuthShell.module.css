@@ -1,0 +1,205 @@
+.page {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+  background: var(--background);
+}
+
+.aside {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-16);
+  padding: var(--space-12) var(--space-12);
+  border-right: 1px solid var(--border-subtle);
+  background:
+    radial-gradient(ellipse 80% 50% at 15% 0%, rgba(255, 255, 255, 0.06), transparent 65%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 60%);
+  overflow: hidden;
+}
+
+.aside::after {
+  content: "";
+  position: absolute;
+  inset: auto -30% -40% -30%;
+  height: 60%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.045), transparent 65%);
+  pointer-events: none;
+}
+
+.asideInner {
+  position: relative;
+  z-index: 1;
+  max-width: 420px;
+  display: grid;
+  gap: var(--space-6);
+}
+
+.asideTitle {
+  font-size: clamp(2rem, 3.4vw, 3.1rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.03;
+}
+
+.asideBody {
+  color: var(--text-secondary);
+  font-size: var(--text-md);
+  line-height: 1.7;
+  max-width: 40ch;
+}
+
+.points {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.point {
+  display: flex;
+  gap: var(--space-3);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.point svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--text-muted);
+}
+
+.asideFoot {
+  position: relative;
+  z-index: 1;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: var(--space-8) var(--space-6) var(--space-12);
+}
+
+.mainTop {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mainInner {
+  width: 100%;
+  max-width: 420px;
+  margin: auto;
+  padding-block: var(--space-10);
+  display: grid;
+  gap: var(--space-6);
+}
+
+.heading {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.heading h1 {
+  font-size: clamp(1.8rem, 3vw, 2.25rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.heading p {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.footer {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.footer a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 3px;
+}
+
+.footer a:hover {
+  text-decoration-color: var(--text-primary);
+}
+
+.legal {
+  margin-top: var(--space-6);
+  color: var(--text-faint);
+  font-size: var(--text-xs);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.legal a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .page {
+    grid-template-columns: 1fr;
+  }
+
+  .aside {
+    border-right: 0;
+    border-bottom: 1px solid var(--border-subtle);
+    padding: var(--space-8) var(--space-6);
+    gap: var(--space-8);
+  }
+
+  .asideTitle {
+    display: none;
+  }
+
+  .asideBody {
+    font-size: var(--text-base);
+  }
+
+  .asideFoot {
+    display: none;
+  }
+
+  .main {
+    padding-top: var(--space-4);
+  }
+
+  .mainInner {
+    padding-block: var(--space-6) var(--space-10);
+  }
+}
+
+/* Phones: the form is the job. Drop the marketing panel so the first
+   actionable field is visible without a full screen of preamble. */
+@media (max-width: 680px) {
+  .aside {
+    display: none;
+  }
+
+  .main {
+    padding: var(--space-4) var(--space-4) var(--space-10);
+  }
+
+  .mainTop {
+    justify-content: flex-start;
+  }
+
+  .mainInner {
+    margin-block: 0 auto;
+    padding-block: var(--space-6) var(--space-8);
+  }
+}

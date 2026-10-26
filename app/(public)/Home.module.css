@@ -1,0 +1,665 @@
+.page {
+  width: 100%;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.78fr);
+  gap: clamp(var(--space-10), 6vw, var(--space-20));
+  align-items: center;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: clamp(var(--space-16), 9vw, var(--space-24)) var(--space-6)
+    clamp(var(--space-12), 7vw, var(--space-20));
+}
+
+.heroCopy {
+  display: grid;
+  gap: var(--space-6);
+  justify-items: start;
+}
+
+.pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 4px rgba(131, 216, 159, 0.08);
+}
+
+.heroTitle {
+  font-size: clamp(2.9rem, 6.4vw, 5.2rem);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.96;
+  max-width: 15ch;
+}
+
+.heroLede {
+  max-width: 54ch;
+  color: var(--text-secondary);
+  font-size: var(--text-md);
+  line-height: 1.7;
+}
+
+.heroActions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: var(--space-2);
+}
+
+.heroMeta {
+  display: flex;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+  padding-top: var(--space-6);
+  margin-top: var(--space-2);
+  border-top: 1px solid var(--border-subtle);
+  width: 100%;
+}
+
+.heroMeta div {
+  display: grid;
+  gap: 2px;
+}
+
+.heroMeta dt {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.heroMeta dd {
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  letter-spacing: -0.02em;
+}
+
+.curriculumMap {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.06), transparent 52%),
+    var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-deep), var(--shadow-inset);
+}
+
+.mapHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.mapLabel {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+}
+
+.mapMeta {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+}
+
+.mapList {
+  display: grid;
+}
+
+.mapRow {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  gap: var(--space-3);
+  align-items: baseline;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.035);
+}
+
+.mapRow:last-child {
+  border-bottom: 0;
+}
+
+.mapIndex {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.mapBody {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.mapTitle {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mapConcepts {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mapMinutes {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.mapFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-faint);
+  font-size: 0.7rem;
+}
+
+.mapFoot a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.mapFoot a:hover {
+  color: var(--text-primary);
+}
+
+.strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+.stripItem {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  padding: var(--space-6);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+  color: var(--text-faint);
+}
+
+.stripItem:first-child {
+  border-left: 1px solid var(--border-subtle);
+}
+
+.stripItem svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.stripItem div {
+  display: grid;
+  gap: 3px;
+}
+
+.stripTitle {
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+}
+
+.stripBody {
+  color: var(--text-faint);
+  font-size: var(--text-xs);
+  line-height: 1.6;
+}
+
+.section {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: clamp(var(--space-16), 8vw, var(--space-24)) var(--space-6) 0;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-8);
+  margin-bottom: var(--space-10);
+}
+
+.sectionCopy {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 64ch;
+}
+
+.sectionTitle {
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.042em;
+  line-height: 1.02;
+  max-width: 20ch;
+}
+
+.sectionLede {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  max-width: 66ch;
+}
+
+.lessonGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.lessonCard {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+  padding: var(--space-5);
+  background: rgba(255, 255, 255, 0.014);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition:
+    background var(--transition-normal),
+    border-color var(--transition-normal),
+    transform var(--transition-normal);
+}
+
+.lessonCard:hover {
+  background: var(--glass);
+  border-color: var(--border);
+  transform: translateY(-2px);
+}
+
+.lessonTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.lessonIndex {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.lessonMeta {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+}
+
+.lessonTitle {
+  font-size: var(--text-md);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.lessonBody {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  line-height: 1.65;
+}
+
+.lessonFoot {
+  display: grid;
+  gap: 2px;
+  padding-top: var(--space-3);
+  margin-top: auto;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.lessonCount {
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+}
+
+.lessonConcepts {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+}
+
+.loopGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.loopCard {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+  padding: var(--space-6);
+  border-right: 1px solid var(--border-subtle);
+}
+
+.loopCard:last-child {
+  border-right: 0;
+}
+
+.loopIndex {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.loopTitle {
+  font-size: var(--text-base);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.loopBody {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  line-height: 1.65;
+}
+
+.evidenceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-10);
+}
+
+.evidenceCard {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  background:
+    radial-gradient(ellipse 80% 100% at 100% 0%, rgba(185, 230, 201, 0.04), transparent 60%),
+    var(--glass-inset);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.refusedCard {
+  background:
+    radial-gradient(ellipse 80% 100% at 100% 0%, rgba(240, 180, 180, 0.04), transparent 60%),
+    var(--glass-inset);
+}
+
+.evidenceHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--text-secondary);
+}
+
+.evidenceHead h3 {
+  font-size: var(--text-base);
+  font-weight: 500;
+}
+
+.evidenceList {
+  display: grid;
+  gap: var(--space-3);
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  line-height: 1.55;
+}
+
+.evidenceList li {
+  position: relative;
+  padding-left: var(--space-4);
+}
+
+.evidenceList li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--border-strong);
+}
+
+.modeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.modeCard {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+  padding: clamp(var(--space-5), 3.5vw, var(--space-8));
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.05), transparent 55%),
+    var(--glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.modeCardAlt {
+  background:
+    radial-gradient(ellipse 80% 90% at 100% 0%, rgba(255, 255, 255, 0.055), transparent 60%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.055), transparent 55%),
+    var(--glass-strong);
+  border-color: var(--border);
+}
+
+.modeTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  color: var(--text-faint);
+}
+
+.modeTitle {
+  font-size: var(--text-xl);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+}
+
+.modeBody {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+}
+
+.modeList {
+  display: grid;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-faint);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}
+
+.modeList li {
+  position: relative;
+  padding-left: var(--space-4);
+}
+
+.modeList li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--border-strong);
+}
+
+.cta {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: clamp(var(--space-16), 8vw, var(--space-24)) var(--space-6) 0;
+}
+
+.ctaInner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-10);
+  padding: clamp(var(--space-8), 5vw, var(--space-12));
+  background:
+    radial-gradient(ellipse 70% 120% at 0% 0%, rgba(255, 255, 255, 0.07), transparent 60%),
+    var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-deep), var(--shadow-inset);
+}
+
+.ctaCopy {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 56ch;
+}
+
+.ctaTitle {
+  font-size: clamp(1.8rem, 3.6vw, 2.7rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.ctaLede {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+}
+
+.ctaActions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 1080px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+
+  .heroTitle {
+    max-width: 18ch;
+  }
+
+  .curriculumMap {
+    max-width: 560px;
+  }
+
+  .lessonGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .loopGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .loopCard:nth-child(2) {
+    border-right: 0;
+  }
+
+  .loopCard:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--border-subtle);
+  }
+}
+
+@media (max-width: 860px) {
+  .strip {
+    grid-template-columns: 1fr;
+  }
+
+  .stripItem {
+    border-left: 1px solid var(--border-subtle);
+    border-bottom: 0;
+  }
+
+  .stripItem:last-child {
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .sectionHead {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .evidenceGrid,
+  .modeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .ctaInner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero,
+  .section,
+  .cta {
+    padding-inline: var(--space-4);
+  }
+
+  .strip {
+    padding-inline: var(--space-4);
+  }
+
+  .lessonGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .loopGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .loopCard {
+    border-right: 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .loopCard:last-child {
+    border-bottom: 0;
+  }
+
+  .loopCard:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .heroMeta {
+    gap: var(--space-5);
+  }
+
+  .mapFoot {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
