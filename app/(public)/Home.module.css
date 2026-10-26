@@ -730,6 +730,17 @@
     gap: var(--space-5);
   }
 
+  .mapRow {
+    align-items: start;
+  }
+
+  .mapTitle,
+  .mapConcepts {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
+
   .mapFoot {
     align-items: flex-start;
     flex-direction: column;
