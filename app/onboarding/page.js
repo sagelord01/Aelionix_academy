@@ -4,7 +4,7 @@ import OnboardingForm from "@/components/onboarding/OnboardingForm";
 import { getProfile, requireUser } from "@/lib/auth/guards";
 import styles from "./Onboarding.module.css";
 
-export const metadata = { title: "Set up your workspace" };
+export const metadata = { title: "Set up your Aelionix Academy workspace" };
 
 // Onboarding reads the current user and profile before rendering the form.
 export const dynamic = "force-dynamic";
@@ -35,7 +35,7 @@ export default async function OnboardingPage() {
   return (
     <main id="main-content" className={styles.page}>
       <header className={styles.top}>
-        <Logo />
+        <Logo priority />
         <div className={styles.progress}>
           <span>Setup 1 of 2</span>
           <span className={styles.steps} aria-hidden="true">

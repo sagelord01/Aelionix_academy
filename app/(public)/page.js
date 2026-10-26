@@ -74,10 +74,10 @@ export default function HomePage() {
           <h1 className={styles.heroTitle}>
             Learn by understanding.
             <br />
-            Build by doing.
+            <span className={styles.heroAccent}>Build by doing.</span>
           </h1>
           <p className={styles.heroLede}>
-            A deliberate learning workspace for programming. Read a short
+            A deliberate AI learning academy for programming. Read a short
             lesson, run real Python in an isolated service, and let graded
             answers and passing tests decide what you should study next.
           </p>
@@ -109,7 +109,11 @@ export default function HomePage() {
           </dl>
         </div>
 
-        <div className={styles.curriculumMap} aria-label="Curriculum overview">
+        <div
+          className={styles.curriculumMap}
+          role="group"
+          aria-label="Curriculum overview"
+        >
           <div className={styles.mapHead}>
             <span className={styles.mapLabel}>Curriculum map</span>
             <span className={styles.mapMeta}>python-foundations</span>

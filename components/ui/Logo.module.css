@@ -1,53 +1,112 @@
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  color: var(--text-primary);
-  font-size: 0.88rem;
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  border-radius: var(--radius-sm);
+  gap: 11px;
   flex: 0 0 auto;
+  max-width: 100%;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition:
+    opacity var(--transition-fast),
+    filter var(--transition-fast);
+}
+
+.logo:hover {
+  opacity: 0.94;
 }
 
 .mark {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(2, 5px);
-  grid-template-rows: repeat(2, 5px);
-  gap: 2px;
-  width: 19px;
-  height: 19px;
-  padding: 2px;
-  border: 1px solid var(--border-strong);
-  border-radius: 5px;
-  background: var(--glass);
+  place-items: center;
+  flex: 0 0 auto;
 }
 
-.mark span {
-  display: block;
-  background: var(--text-primary);
-  border-radius: 1px;
-  opacity: 0.9;
+.image {
+  width: auto;
+  height: 34px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 14px rgba(59, 130, 246, 0.2));
+  transition: filter var(--transition-fast);
 }
 
-.mark span:nth-child(1) {
-  grid-column: span 2;
-}
-
-.mark span:nth-child(2) {
-  opacity: 0.55;
-}
-
-.mark span:nth-child(3) {
-  opacity: 0.35;
+.logo:hover .image {
+  filter: drop-shadow(0 0 18px rgba(139, 92, 246, 0.34));
 }
 
 .wordmark {
-  white-space: nowrap;
+  display: grid;
+  gap: 3px;
+  line-height: 1;
 }
 
-@media (max-width: 380px) {
+.name {
+  color: var(--text-primary);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.105em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.descriptor {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.54rem;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.full {
+  display: inline-block;
+  width: clamp(150px, 15vw, 188px);
+}
+
+.full .mark {
+  width: 100%;
+}
+
+.full .image {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 22px rgba(59, 130, 246, 0.18));
+}
+
+.full:hover .image {
+  filter: drop-shadow(0 0 28px rgba(139, 92, 246, 0.3));
+}
+
+@media (max-width: 680px) {
+  .full {
+    width: 140px;
+  }
+}
+
+@media (max-width: 520px) {
+  .logo {
+    gap: 9px;
+  }
+
+  .image {
+    height: 30px;
+  }
+
+  .name {
+    font-size: 0.78rem;
+  }
+
+  .descriptor {
+    font-size: 0.5rem;
+    letter-spacing: 0.28em;
+  }
+}
+
+/* Keep the emblem as the compact signature when a phone bar is tight. */
+@media (max-width: 374px) {
   .wordmark {
-    font-size: 0.8rem;
+    display: none;
   }
 }

@@ -39,7 +39,8 @@
 }
 
 .stepOn {
-  background: var(--text-primary);
+  background: linear-gradient(90deg, var(--brand-violet), var(--brand-cyan));
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.26);
 }
 
 .layout {
@@ -98,15 +99,24 @@
 .card {
   max-width: 760px;
   padding: clamp(var(--space-6), 4vw, var(--space-10));
-  background: linear-gradient(
+  background:
+    radial-gradient(
+      ellipse 70% 44% at 100% 0%,
+      rgba(34, 211, 238, 0.055),
+      transparent 64%
+    ),
+    linear-gradient(
       160deg,
-      rgba(255, 255, 255, 0.055),
-      rgba(255, 255, 255, 0.01) 45%
+      rgba(139, 92, 246, 0.095),
+      rgba(139, 133, 255, 0.018) 48%
     ),
     var(--glass);
-  border: 1px solid var(--border);
+  border: 1px solid var(--accent-border);
   border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-deep), var(--shadow-inset);
+  box-shadow:
+    var(--shadow-deep),
+    var(--shadow-inset),
+    0 0 46px rgba(139, 92, 246, 0.08);
   backdrop-filter: blur(var(--blur-strong));
   -webkit-backdrop-filter: blur(var(--blur-strong));
 }

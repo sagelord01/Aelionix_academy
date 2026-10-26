@@ -95,7 +95,7 @@
 }
 
 .panelLink:hover {
-  color: var(--text-primary);
+  color: var(--brand-cyan);
 }
 
 .statusLegend {
@@ -192,8 +192,8 @@
 
 .track {
   width: 100%;
-  height: 3px;
-  background: var(--glass-strong);
+  height: 4px;
+  background: rgba(139, 133, 255, 0.13);
   border-radius: var(--radius-pill);
   overflow: hidden;
 }
@@ -201,8 +201,14 @@
 .fill {
   display: block;
   height: 100%;
-  background: var(--text-primary);
+  background: linear-gradient(
+    90deg,
+    var(--brand-violet),
+    var(--brand-blue),
+    var(--brand-cyan)
+  );
   border-radius: inherit;
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.22);
   transition: width var(--transition-slow);
 }
 
@@ -292,7 +298,8 @@
   margin-top: 7px;
   flex: 0 0 auto;
   border-radius: 50%;
-  background: var(--border-strong);
+  background: var(--brand-violet);
+  opacity: 0.55;
 }
 
 .attemptPass {
@@ -346,7 +353,8 @@ a.attemptTitle:hover {
   height: 5px;
   margin-top: 6px;
   border-radius: 50%;
-  background: var(--border-strong);
+  background: var(--brand-cyan);
+  opacity: 0.65;
 }
 
 .recallPrompt {
@@ -389,7 +397,8 @@ a.attemptTitle:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: var(--border-strong);
+  background: var(--brand-violet);
+  opacity: 0.65;
 }
 
 .rowActions {

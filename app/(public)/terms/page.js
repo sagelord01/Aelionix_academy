@@ -4,7 +4,7 @@ import styles from "../Legal.module.css";
 export const metadata = {
   title: "Terms of use",
   description:
-    "The terms that govern use of this reference learning workspace.",
+    "The terms that govern use of the Aelionix Academy learning platform.",
 };
 
 const sections = [
@@ -19,7 +19,7 @@ const sections = [
     id: "service",
     title: "What the service is",
     body: [
-      "Learning Workspace is an educational programming tool. It provides short lessons, runnable Python exercises, an adaptive starting-point check, spaced review, and an AI tutor in two modes. It is not an accredited course, a certification, or professional advice.",
+      "Aelionix Academy is an educational programming platform. It provides short lessons, runnable Python exercises, an adaptive starting-point check, spaced review, and an AI tutor in two modes. It is not an accredited course, a certification, or professional advice.",
       "Execution results, mastery status, and recommendations are derived from the evidence the system actually receives. They are not a guarantee of competence, employment, or any particular learning outcome.",
     ],
   },

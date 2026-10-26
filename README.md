@@ -1,4 +1,4 @@
-# Learning Workspace
+# Aelionix Academy
 
 A production-oriented Python learning platform built with Next.js App Router. It combines a structured curriculum, an adaptive starting-point check, a real code-execution workspace, spaced review, evidence-based mastery, and two deliberately different AI tutor modes.
 

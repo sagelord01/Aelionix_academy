@@ -152,7 +152,7 @@ export default async function DashboardPage() {
   return (
     <div className={styles.page}>
       <PageHeader
-        eyebrow="Workspace"
+        eyebrow="Aelionix Academy"
         title={`Welcome back, ${profile.display_name || "learner"}.`}
         description={
           assessmentCompleted

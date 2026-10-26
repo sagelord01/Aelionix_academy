@@ -4,7 +4,7 @@ import styles from "../Legal.module.css";
 export const metadata = {
   title: "Privacy",
   description:
-    "What this learning workspace stores, why it stores it, and the controls available to a learner.",
+    "What Aelionix Academy stores, why it stores it, and the controls available to a learner.",
 };
 
 const sections = [
@@ -12,7 +12,7 @@ const sections = [
     id: "scope",
     title: "Scope and responsibility",
     body: [
-      "This page describes the reference Learning Workspace application. It is a factual description of what the code does, not legal advice and not a compliance certification. Anyone who deploys this application is responsible for publishing their own policy, identifying their legal entity, and meeting the requirements that apply to them.",
+      "This page describes the Aelionix Academy application. It is a factual description of what the code does, not legal advice and not a compliance certification. Anyone who deploys this application is responsible for publishing their own policy, identifying their legal entity, and meeting the requirements that apply to them.",
     ],
   },
   {

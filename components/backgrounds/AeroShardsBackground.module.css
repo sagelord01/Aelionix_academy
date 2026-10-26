@@ -9,7 +9,7 @@
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  background: #080808;
+  background: var(--background);
 }
 
 .gradient {
@@ -18,31 +18,36 @@
   background:
     radial-gradient(
       ellipse 62% 48% at 16% 4%,
-      rgba(129, 140, 248, 0.2),
+      rgba(139, 92, 246, 0.16),
       transparent 62%
     ),
     radial-gradient(
       ellipse 54% 46% at 82% 8%,
-      rgba(180, 166, 240, 0.16),
+      rgba(59, 130, 246, 0.13),
       transparent 64%
     ),
     radial-gradient(
+      ellipse 38% 34% at 76% 34%,
+      rgba(34, 211, 238, 0.05),
+      transparent 68%
+    ),
+    radial-gradient(
       ellipse 90% 70% at 50% 108%,
-      rgba(76, 29, 149, 0.32),
+      rgba(37, 99, 235, 0.18),
       transparent 66%
     ),
     radial-gradient(
       ellipse 120% 90% at 50% 50%,
-      #0d0819 0%,
-      #080808 72%
+      #0b0d24 0%,
+      #070816 72%
     );
 }
 
 .shards {
   position: absolute;
   inset: 0;
-  opacity: 0.34;
-  filter: brightness(0.7) saturate(0.98);
+  opacity: 0.3;
+  filter: brightness(0.72) saturate(1.02);
   transition: opacity 600ms ease;
 }
 
@@ -63,14 +68,14 @@
   background:
     radial-gradient(
       ellipse 100% 80% at 50% 38%,
-      rgba(8, 8, 8, 0.12) 0%,
-      rgba(8, 8, 8, 0.5) 100%
+      rgba(7, 8, 22, 0.12) 0%,
+      rgba(7, 8, 22, 0.5) 100%
     ),
     linear-gradient(
       180deg,
-      rgba(8, 8, 8, 0.56) 0%,
-      rgba(8, 8, 8, 0.4) 34%,
-      rgba(8, 8, 8, 0.62) 100%
+      rgba(7, 8, 22, 0.56) 0%,
+      rgba(7, 8, 22, 0.4) 34%,
+      rgba(7, 8, 22, 0.62) 100%
     );
 }
 
@@ -100,14 +105,14 @@
     background:
       radial-gradient(
         ellipse 46% 60% at 50% 45%,
-        rgba(8, 8, 8, 0.02) 0%,
-        rgba(8, 8, 8, 0.4) 100%
+        rgba(7, 8, 22, 0.02) 0%,
+        rgba(7, 8, 22, 0.4) 100%
       ),
       linear-gradient(
         180deg,
-        rgba(8, 8, 8, 0.5) 0%,
-        rgba(8, 8, 8, 0.3) 38%,
-        rgba(8, 8, 8, 0.6) 100%
+        rgba(7, 8, 22, 0.5) 0%,
+        rgba(7, 8, 22, 0.3) 38%,
+        rgba(7, 8, 22, 0.6) 100%
       );
   }
 }

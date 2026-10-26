@@ -25,29 +25,31 @@
 
 .success {
   background: var(--success-bg);
-  border-color: rgba(131, 216, 159, 0.18);
+  border-color: var(--success-border);
   color: var(--success);
 }
 
 .warning {
   background: var(--warning-bg);
-  border-color: rgba(224, 190, 111, 0.18);
+  border-color: var(--warning-border);
   color: var(--warning);
 }
 
 .danger {
   background: var(--danger-bg);
-  border-color: rgba(229, 121, 121, 0.2);
+  border-color: var(--danger-border);
   color: var(--danger);
 }
 
 .info {
   background: var(--info-bg);
+  border-color: var(--info-border);
   color: var(--info);
 }
 
 .solid {
-  background: var(--text-primary);
-  border-color: var(--text-primary);
-  color: var(--text-inverse);
+  background: linear-gradient(135deg, #6d28d9, #4338ca);
+  border-color: var(--accent-border);
+  color: var(--text-on-accent);
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.16);
 }

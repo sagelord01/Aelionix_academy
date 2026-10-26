@@ -83,24 +83,25 @@
   align-items: flex-start;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-4);
-  background: rgba(255, 255, 255, 0.012);
+  background: var(--glass-inset);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition:
     background var(--transition-fast),
-    border-color var(--transition-fast);
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .choice:hover {
   background: var(--glass);
-  border-color: var(--border);
+  border-color: var(--accent-border);
 }
 
 .choice:has(.radio:checked) {
-  background: var(--glass-strong);
-  border-color: var(--border-strong);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  background: var(--accent-soft);
+  border-color: var(--accent-border);
+  box-shadow: inset 2px 0 0 var(--brand-violet);
 }
 
 .choice:has(.radio:focus-visible) {
@@ -142,8 +143,8 @@
   font-size: var(--text-xs);
   line-height: 1.6;
   padding: var(--space-3) var(--space-4);
-  border-left: 1px solid var(--border);
-  background: var(--glass-inset);
+  border-left: 1px solid var(--accent-border);
+  background: var(--accent-softer);
   border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
 }
 

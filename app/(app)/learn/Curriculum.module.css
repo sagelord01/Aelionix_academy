@@ -10,8 +10,15 @@
   justify-content: space-between;
   gap: var(--space-8);
   padding: var(--space-6);
-  background: var(--glass);
-  border: 1px solid var(--border-subtle);
+  background:
+    radial-gradient(
+      ellipse 58% 100% at 100% 0%,
+      rgba(34, 211, 238, 0.06),
+      transparent 65%
+    ),
+    linear-gradient(145deg, rgba(139, 92, 246, 0.09), transparent 58%),
+    var(--glass);
+  border: 1px solid var(--accent-border);
   border-radius: var(--radius-lg);
   flex-wrap: wrap;
 }
@@ -71,24 +78,38 @@
   padding: var(--space-5) var(--space-5);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.014);
-  transition: background var(--transition-fast), border-color var(--transition-fast);
+  background:
+    linear-gradient(145deg, rgba(139, 92, 246, 0.035), transparent 60%),
+    var(--glass-inset);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .row:hover {
   background: var(--glass);
-  border-color: var(--border);
+  border-color: var(--accent-border);
+  box-shadow: 0 12px 30px rgba(2, 3, 14, 0.2);
 }
 
 .rowNext {
-  background: linear-gradient(
+  background:
+    radial-gradient(
+      ellipse 60% 120% at 100% 0%,
+      rgba(34, 211, 238, 0.06),
+      transparent 62%
+    ),
+    linear-gradient(
       150deg,
-      rgba(255, 255, 255, 0.055),
-      rgba(255, 255, 255, 0.015) 55%
+      rgba(139, 92, 246, 0.14),
+      rgba(59, 130, 246, 0.035) 55%
     ),
     var(--glass);
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-inset);
+  border-color: var(--accent-border);
+  box-shadow:
+    var(--shadow-inset),
+    0 0 30px rgba(139, 92, 246, 0.08);
 }
 
 .indexCol {
@@ -116,19 +137,21 @@
 
 .completed {
   color: var(--success);
-  border-color: rgba(185, 230, 201, 0.22);
+  border-color: var(--success-border);
   background: var(--success-bg);
 }
 
 .in_progress {
-  border-color: var(--border-strong);
+  border-color: var(--accent-border);
+  background: var(--accent-softer);
 }
 
 .pulseDot {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--text-secondary);
+  background: var(--brand-cyan);
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.42);
 }
 
 .body {
@@ -211,10 +234,10 @@
 }
 
 .track {
-  height: 3px;
+  height: 4px;
   flex: 1;
   max-width: 280px;
-  background: var(--glass-strong);
+  background: rgba(139, 133, 255, 0.13);
   border-radius: var(--radius-pill);
   overflow: hidden;
 }
@@ -222,8 +245,14 @@
 .fill {
   display: block;
   height: 100%;
-  background: var(--text-secondary);
+  background: linear-gradient(
+    90deg,
+    var(--brand-violet),
+    var(--brand-blue),
+    var(--brand-cyan)
+  );
   border-radius: inherit;
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.24);
 }
 
 .progressText {
@@ -246,9 +275,9 @@
 }
 
 .row:hover .arrow {
-  color: var(--text-primary);
-  border-color: var(--border-strong);
-  background: var(--glass);
+  color: var(--brand-cyan);
+  border-color: var(--accent-border);
+  background: var(--accent-softer);
 }
 
 .footNote {

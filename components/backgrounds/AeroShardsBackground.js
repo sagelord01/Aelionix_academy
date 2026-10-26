@@ -71,8 +71,8 @@ function readQuality() {
     coarse,
     lowPower,
     settings: {
-      shardColor: "#b4a6f0",
-      accentColor: "#818cf8",
+      shardColor: "#8b5cf6",
+      accentColor: "#3b82f6",
       backgroundColor: "transparent",
       placement: "full",
       material: "glass",

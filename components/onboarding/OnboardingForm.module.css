@@ -76,18 +76,21 @@
 
 .choice:hover .choiceBody {
   background: var(--glass-strong);
-  border-color: var(--border);
+  border-color: var(--accent-border);
 }
 
 .radio:checked + .choiceBody {
-  background: linear-gradient(
+  background:
+    linear-gradient(
       150deg,
-      rgba(255, 255, 255, 0.09),
-      rgba(255, 255, 255, 0.025)
+      rgba(139, 92, 246, 0.16),
+      rgba(34, 211, 238, 0.035)
     ),
     var(--glass);
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-inset);
+  border-color: var(--accent-border);
+  box-shadow:
+    inset 2px 0 0 var(--brand-violet),
+    var(--shadow-inset);
 }
 
 .radio:focus-visible + .choiceBody {

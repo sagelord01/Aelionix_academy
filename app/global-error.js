@@ -21,16 +21,17 @@ export default function GlobalError({ error, reset }) {
               display: "grid",
               gap: "16px",
               padding: "40px",
-              border: "1px solid rgba(255,255,255,0.09)",
+              border: "1px solid var(--border)",
               borderRadius: "18px",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--surface)",
+              boxShadow: "var(--shadow-glass), var(--shadow-inset)",
             }}
           >
-            <p className="eyebrow">Application error</p>
+            <p className="eyebrow">Aelionix Academy · Application error</p>
             <h1 style={{ fontSize: "1.8rem", fontWeight: 400 }}>
               The application could not finish starting.
             </h1>
-            <p style={{ color: "#a1a1aa", fontSize: "0.85rem", lineHeight: 1.65 }}>
+            <p style={{ color: "var(--text-secondary)", fontSize: "0.85rem", lineHeight: 1.65 }}>
               Reload the page. If the failure persists, check the server logs and
               the integration configuration. No learner data is changed by a
               failed render.
@@ -38,7 +39,7 @@ export default function GlobalError({ error, reset }) {
             {error?.digest ? (
               <p
                 style={{
-                  color: "#808089",
+                  color: "var(--text-faint)",
                   fontFamily: "var(--font-mono)",
                   fontSize: "0.7rem",
                 }}
@@ -54,8 +55,9 @@ export default function GlobalError({ error, reset }) {
                 minHeight: "42px",
                 padding: "0 16px",
                 borderRadius: "9px",
-                background: "#f4f4f5",
-                color: "#09090b",
+                background: "linear-gradient(135deg, #6d28d9, #4338ca)",
+                border: "1px solid var(--accent-border)",
+                color: "var(--text-on-accent)",
                 fontWeight: 500,
                 cursor: "pointer",
               }}

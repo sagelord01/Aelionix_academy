@@ -13,7 +13,7 @@ export default function PublicShell({ children, signedIn = false }) {
     <div className={styles.shell}>
       <header className={styles.header}>
         <div className={styles.headerInner}>
-          <Logo />
+          <Logo priority />
           <nav className={styles.nav} aria-label="Public">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href} className={styles.navLink}>
@@ -47,15 +47,15 @@ export default function PublicShell({ children, signedIn = false }) {
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
           <div className={styles.footerBrand}>
-            <Logo />
+            <Logo variant="full" />
             <p>
-              A deliberate programming workspace: real execution, inspected
-              evidence, and two genuinely different tutor stances.
+              An AI-assisted learning academy for programming: real execution,
+              inspected evidence, and two genuinely different tutor stances.
             </p>
           </div>
           <div className={styles.footerCols}>
             <div className={styles.footerCol}>
-              <span className={styles.footerLabel}>Workspace</span>
+              <span className={styles.footerLabel}>Account</span>
               <Link href="/signup">Create account</Link>
               <Link href="/login">Sign in</Link>
               <Link href="/forgot-password">Reset password</Link>
@@ -74,7 +74,7 @@ export default function PublicShell({ children, signedIn = false }) {
           </div>
         </div>
         <div className={styles.footerBase}>
-          <span>Learning Workspace</span>
+          <span>Aelionix Academy</span>
           <span>Built as a working application, not a demo with fake data.</span>
         </div>
       </footer>

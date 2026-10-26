@@ -13,12 +13,12 @@ export default function AuthShell({
   description,
   children,
   footer,
-  eyebrow = "Your learning workspace",
+  eyebrow = "Your AI learning academy",
 }) {
   return (
     <div className={styles.page}>
       <aside className={styles.aside}>
-        <Logo />
+        <Logo variant="full" />
         <div className={styles.asideInner}>
           <p className="eyebrow">{eyebrow}</p>
           <h2 className={styles.asideTitle}>
@@ -27,9 +27,9 @@ export default function AuthShell({
             thing you keep.
           </h2>
           <p className={styles.asideBody}>
-            Learning Workspace combines a careful curriculum, real code
-            execution, and evidence-based tutoring. Nothing here claims progress
-            you have not demonstrated.
+            Aelionix Academy combines a careful curriculum, real code execution,
+            and evidence-based AI tutoring. Nothing here claims progress you
+            have not demonstrated.
           </p>
           <ul className={styles.points}>
             {points.map((point) => (
@@ -40,12 +40,12 @@ export default function AuthShell({
             ))}
           </ul>
         </div>
-        <p className={styles.asideFoot}>Monochrome Precision Glass</p>
+        <p className={styles.asideFoot}>Aelionix Academy · Learn by understanding</p>
       </aside>
 
       <main id="main-content" className={styles.main}>
         <div className={styles.mainTop}>
-          <Logo href="/" label="Learning Workspace" />
+          <Logo href="/" label="Aelionix Academy" />
         </div>
         <div className={styles.mainInner}>
           <header className={styles.heading}>

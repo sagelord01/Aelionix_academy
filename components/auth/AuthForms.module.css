@@ -1,10 +1,12 @@
 .stack {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-5);
 }
 
 .form {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-5);
 }
 
@@ -33,11 +35,11 @@
   color: var(--text-primary);
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: var(--border-strong);
+  text-decoration-color: var(--accent-border);
 }
 
 .switch a:hover {
-  text-decoration-color: var(--text-primary);
+  text-decoration-color: var(--brand-cyan);
 }
 
 .divider {
@@ -77,12 +79,16 @@
   border-radius: var(--radius-md);
   color: var(--text-primary);
   font-size: var(--text-sm);
-  transition: background var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .google:hover:not(:disabled) {
   background: var(--glass-strong);
-  border-color: var(--border-strong);
+  border-color: var(--accent-border);
+  box-shadow: 0 0 24px rgba(139, 92, 246, 0.08);
 }
 
 .google:disabled {
@@ -95,8 +101,9 @@
   place-items: center;
   width: 22px;
   height: 22px;
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--accent-border);
   border-radius: 50%;
+  background: var(--accent-softer);
   font-family: var(--font-mono);
   font-size: 0.7rem;
   color: var(--text-secondary);

@@ -11,6 +11,17 @@
   margin-inline: auto;
   padding: clamp(var(--space-16), 9vw, var(--space-24)) var(--space-6)
     clamp(var(--space-12), 7vw, var(--space-20));
+  background:
+    radial-gradient(
+      ellipse 50% 64% at 12% 34%,
+      rgba(139, 92, 246, 0.11),
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 34% 52% at 86% 20%,
+      rgba(34, 211, 238, 0.055),
+      transparent 70%
+    );
 }
 
 .heroCopy {
@@ -23,8 +34,10 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--success);
-  box-shadow: 0 0 0 4px rgba(131, 216, 159, 0.08);
+  background: var(--brand-cyan);
+  box-shadow:
+    0 0 0 4px rgba(34, 211, 238, 0.09),
+    0 0 14px rgba(34, 211, 238, 0.38);
 }
 
 .heroTitle {
@@ -33,6 +46,20 @@
   letter-spacing: -0.055em;
   line-height: 0.96;
   max-width: 15ch;
+}
+
+.heroAccent {
+  background: linear-gradient(100deg, #ddd6fe 0%, #a5b4fc 48%, #67e8f9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (forced-colors: active) {
+  .heroAccent {
+    background: none;
+    color: CanvasText;
+  }
 }
 
 .heroLede {
@@ -84,11 +111,19 @@
   gap: var(--space-4);
   padding: var(--space-5);
   background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.06), transparent 52%),
+    radial-gradient(
+      ellipse 80% 90% at 100% 0%,
+      rgba(34, 211, 238, 0.075),
+      transparent 62%
+    ),
+    linear-gradient(160deg, rgba(139, 92, 246, 0.1), transparent 54%),
     var(--glass);
-  border: 1px solid var(--border);
+  border: 1px solid var(--accent-border);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-deep), var(--shadow-inset);
+  box-shadow:
+    var(--shadow-deep),
+    var(--shadow-inset),
+    0 0 42px rgba(139, 92, 246, 0.09);
 }
 
 .mapHead {
@@ -122,7 +157,7 @@
   gap: var(--space-3);
   align-items: baseline;
   padding: 7px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.035);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .mapRow:last-child {
@@ -279,18 +314,24 @@
   gap: var(--space-3);
   align-content: start;
   padding: var(--space-5);
-  background: rgba(255, 255, 255, 0.014);
+  background:
+    linear-gradient(160deg, rgba(139, 92, 246, 0.045), transparent 58%),
+    var(--glass-inset);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   transition:
     background var(--transition-normal),
     border-color var(--transition-normal),
+    box-shadow var(--transition-normal),
     transform var(--transition-normal);
 }
 
 .lessonCard:hover {
-  background: var(--glass);
-  border-color: var(--border);
+  background:
+    linear-gradient(160deg, rgba(139, 92, 246, 0.1), transparent 58%),
+    var(--glass);
+  border-color: var(--accent-border);
+  box-shadow: 0 16px 38px rgba(2, 3, 14, 0.28);
   transform: translateY(-2px);
 }
 
@@ -396,7 +437,7 @@
   gap: var(--space-5);
   padding: var(--space-6);
   background:
-    radial-gradient(ellipse 80% 100% at 100% 0%, rgba(185, 230, 201, 0.04), transparent 60%),
+    radial-gradient(ellipse 80% 100% at 100% 0%, rgba(34, 211, 238, 0.07), transparent 60%),
     var(--glass-inset);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
@@ -404,7 +445,7 @@
 
 .refusedCard {
   background:
-    radial-gradient(ellipse 80% 100% at 100% 0%, rgba(240, 180, 180, 0.04), transparent 60%),
+    radial-gradient(ellipse 80% 100% at 100% 0%, rgba(251, 113, 133, 0.055), transparent 60%),
     var(--glass-inset);
 }
 
@@ -441,7 +482,8 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: var(--border-strong);
+  background: var(--brand-cyan);
+  opacity: 0.7;
 }
 
 .modeGrid {
@@ -456,7 +498,7 @@
   align-content: start;
   padding: clamp(var(--space-5), 3.5vw, var(--space-8));
   background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.05), transparent 55%),
+    linear-gradient(160deg, rgba(139, 92, 246, 0.075), transparent 55%),
     var(--glass);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
@@ -464,10 +506,10 @@
 
 .modeCardAlt {
   background:
-    radial-gradient(ellipse 80% 90% at 100% 0%, rgba(255, 255, 255, 0.055), transparent 60%),
-    linear-gradient(160deg, rgba(255, 255, 255, 0.055), transparent 55%),
+    radial-gradient(ellipse 80% 90% at 100% 0%, rgba(34, 211, 238, 0.07), transparent 60%),
+    linear-gradient(160deg, rgba(59, 130, 246, 0.08), transparent 55%),
     var(--glass-strong);
-  border-color: var(--border);
+  border-color: var(--accent-border);
 }
 
 .modeTop {
@@ -513,7 +555,8 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: var(--border-strong);
+  background: var(--brand-violet);
+  opacity: 0.75;
 }
 
 .cta {
@@ -523,17 +566,46 @@
 }
 
 .ctaInner {
+  position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: var(--space-10);
   padding: clamp(var(--space-8), 5vw, var(--space-12));
   background:
-    radial-gradient(ellipse 70% 120% at 0% 0%, rgba(255, 255, 255, 0.07), transparent 60%),
+    radial-gradient(
+      ellipse 54% 120% at 0% 0%,
+      rgba(139, 92, 246, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 44% 100% at 100% 100%,
+      rgba(34, 211, 238, 0.07),
+      transparent 66%
+    ),
     var(--glass);
-  border: 1px solid var(--border);
+  border: 1px solid var(--accent-border);
   border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-deep), var(--shadow-inset);
+  box-shadow:
+    var(--shadow-deep),
+    var(--shadow-inset),
+    0 0 54px rgba(139, 92, 246, 0.1);
+  overflow: hidden;
+}
+
+.ctaInner::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(167, 139, 250, 0.72) 30%,
+    rgba(34, 211, 238, 0.55) 70%,
+    transparent
+  );
+  pointer-events: none;
 }
 
 .ctaCopy {

@@ -1,7 +1,7 @@
 .spinner {
   display: inline-block;
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
-  border-top-color: rgba(255, 255, 255, 0.85);
+  border: 1.5px solid rgba(167, 139, 250, 0.24);
+  border-top-color: var(--brand-cyan);
   border-radius: 50%;
   animation: spin 700ms linear infinite;
   flex: 0 0 auto;
@@ -10,5 +10,13 @@
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+    border-color: rgba(167, 139, 250, 0.3);
+    border-top-color: var(--brand-cyan);
   }
 }

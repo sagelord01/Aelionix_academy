@@ -10,8 +10,15 @@
   gap: var(--space-5);
   align-items: center;
   padding: var(--space-5);
-  background: var(--glass);
-  border: 1px solid var(--border-subtle);
+  background:
+    radial-gradient(
+      ellipse 56% 100% at 100% 0%,
+      rgba(34, 211, 238, 0.055),
+      transparent 64%
+    ),
+    linear-gradient(145deg, rgba(139, 92, 246, 0.08), transparent 58%),
+    var(--glass);
+  border: 1px solid var(--accent-border);
   border-radius: var(--radius-lg);
 }
 
@@ -67,7 +74,9 @@
   gap: var(--space-3);
   align-content: start;
   padding: var(--space-4);
-  background: rgba(255, 255, 255, 0.012);
+  background:
+    linear-gradient(145deg, rgba(139, 92, 246, 0.035), transparent 58%),
+    var(--glass-inset);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
 }
@@ -184,7 +193,7 @@
 .rules a {
   color: var(--text-secondary);
   text-decoration: underline;
-  text-decoration-color: var(--border-strong);
+  text-decoration-color: var(--accent-border);
   text-underline-offset: 3px;
 }
 

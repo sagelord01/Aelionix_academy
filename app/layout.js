@@ -16,18 +16,18 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: {
-    default: "Learning Workspace — Learn by understanding",
-    template: "%s · Learning Workspace",
+    default: "Aelionix Academy — Learn by understanding",
+    template: "%s · Aelionix Academy",
   },
   description:
-    "An adaptive learning workspace for programming: personalized explanations, real code execution, evidence-based feedback, and spaced recall.",
+    "An adaptive AI learning academy for programming: personalized explanations, real code execution, evidence-based feedback, and spaced recall.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   ),
   openGraph: {
-    title: "Learning Workspace",
+    title: "Aelionix Academy",
     description:
-      "Learn by understanding. Build by doing. An adaptive workspace for learning to program.",
+      "Learn by understanding. Build by doing. An adaptive AI learning academy for programming.",
     type: "website",
   },
 };

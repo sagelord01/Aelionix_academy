@@ -1,7 +1,7 @@
 export const metadata = {
   title: {
-    template: "%s · Learning Workspace",
-    default: "Account · Learning Workspace",
+    template: "%s · Aelionix Academy",
+    default: "Account · Aelionix Academy",
   },
 };
 

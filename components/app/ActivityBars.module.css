@@ -34,13 +34,22 @@
   min-width: 2px;
   background: var(--glass-strong);
   border-radius: 2px 2px 0 0;
-  transition: height var(--transition-slow), background var(--transition-fast);
+  transition:
+    height var(--transition-slow),
+    background var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .withData {
-  background: rgba(255, 255, 255, 0.38);
+  background: linear-gradient(
+    180deg,
+    rgba(34, 211, 238, 0.78),
+    rgba(139, 92, 246, 0.6)
+  );
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.14);
 }
 
 .withData:hover {
-  background: var(--text-primary);
+  background: linear-gradient(180deg, #a5f3fc, #c4b5fd);
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.28);
 }

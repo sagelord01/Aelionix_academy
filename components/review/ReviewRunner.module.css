@@ -28,8 +28,8 @@
 
 .track {
   flex: 1 1 auto;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.07);
+  height: 4px;
+  background: rgba(139, 133, 255, 0.13);
   border-radius: var(--radius-pill);
   overflow: hidden;
 }
@@ -37,7 +37,13 @@
 .fill {
   display: block;
   height: 100%;
-  background: var(--text-primary);
+  background: linear-gradient(
+    90deg,
+    var(--brand-violet),
+    var(--brand-blue),
+    var(--brand-cyan)
+  );
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.22);
   transition: width var(--transition-slow);
 }
 
@@ -46,11 +52,19 @@
   gap: var(--space-5);
   padding: var(--space-6);
   background:
-    linear-gradient(165deg, rgba(255, 255, 255, 0.045), transparent 46%),
+    radial-gradient(
+      ellipse 66% 100% at 100% 0%,
+      rgba(34, 211, 238, 0.05),
+      transparent 62%
+    ),
+    linear-gradient(165deg, rgba(139, 92, 246, 0.1), transparent 46%),
     var(--glass);
-  border: 1px solid var(--border);
+  border: 1px solid var(--accent-border);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-glass), var(--shadow-inset);
+  box-shadow:
+    var(--shadow-glass),
+    var(--shadow-inset),
+    0 0 36px rgba(139, 92, 246, 0.065);
   backdrop-filter: blur(var(--blur-glass));
   -webkit-backdrop-filter: blur(var(--blur-glass));
 }
@@ -86,7 +100,7 @@
 
 .prompt :global(code) {
   padding: 1px 5px;
-  background: rgba(255, 255, 255, 0.055);
+  background: var(--accent-softer);
   border: 1px solid var(--border-subtle);
   border-radius: 4px;
   font-size: 0.88em;
@@ -117,29 +131,31 @@
   gap: var(--space-3);
   align-items: center;
   padding: var(--space-3) var(--space-4);
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--glass-inset);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition:
     background var(--transition-fast),
-    border-color var(--transition-fast);
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .option:hover {
   background: var(--glass);
-  border-color: var(--border);
+  border-color: var(--accent-border);
 }
 
 .optionSelected {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: var(--border-strong);
+  background: var(--accent-soft);
+  border-color: var(--accent-border);
+  box-shadow: inset 2px 0 0 var(--brand-violet);
 }
 
 .radio {
   width: 15px;
   height: 15px;
-  accent-color: var(--text-primary);
+  accent-color: var(--brand-violet);
 }
 
 .optionText {
@@ -168,10 +184,11 @@
 .textarea {
   width: 100%;
   padding: var(--space-3);
-  background: rgba(0, 0, 0, 0.24);
+  background: rgba(7, 8, 22, 0.58);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   color: var(--text-primary);
+  caret-color: var(--brand-cyan);
   font-family: var(--font-mono);
   font-size: var(--text-sm);
   line-height: 1.6;
@@ -179,7 +196,7 @@
 }
 
 .textarea:focus-visible {
-  border-color: var(--border-strong);
+  border-color: var(--accent-border);
   box-shadow: var(--focus-ring);
 }
 
@@ -197,7 +214,7 @@
 
 .confidenceOption {
   padding: 5px 10px;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--glass-inset);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-pill);
   color: var(--text-muted);
@@ -217,12 +234,12 @@
 
 .confidenceOption:hover {
   color: var(--text-primary);
-  border-color: var(--border);
+  border-color: var(--accent-border);
 }
 
 .confidenceActive {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: var(--border-strong);
+  background: var(--accent-soft);
+  border-color: var(--accent-border);
   color: var(--text-primary);
 }
 
@@ -236,12 +253,12 @@
 
 .correct {
   background: var(--success-bg);
-  border-color: rgba(131, 216, 159, 0.22);
+  border-color: var(--success-border);
 }
 
 .incorrect {
   background: var(--warning-bg);
-  border-color: rgba(224, 190, 111, 0.22);
+  border-color: var(--warning-border);
 }
 
 .resultHead {
@@ -332,11 +349,18 @@
   max-width: 680px;
   padding: var(--space-8);
   background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.05), transparent 50%),
+    radial-gradient(
+      ellipse 64% 100% at 100% 0%,
+      rgba(34, 211, 238, 0.055),
+      transparent 64%
+    ),
+    linear-gradient(160deg, rgba(139, 92, 246, 0.1), transparent 50%),
     var(--glass);
-  border: 1px solid var(--border);
+  border: 1px solid var(--accent-border);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-glass);
+  box-shadow:
+    var(--shadow-glass),
+    0 0 38px rgba(139, 92, 246, 0.07);
 }
 
 .doneIcon {
@@ -345,7 +369,7 @@
   width: 48px;
   height: 48px;
   background: var(--success-bg);
-  border: 1px solid rgba(131, 216, 159, 0.24);
+  border: 1px solid var(--success-border);
   border-radius: 50%;
   color: var(--success);
 }

@@ -15,8 +15,13 @@
   padding: var(--space-6) var(--space-4);
   border-right: 1px solid var(--border-subtle);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 30%),
-    rgba(9, 9, 10, 0.72);
+    radial-gradient(
+      ellipse 90% 34% at 0% 0%,
+      rgba(139, 92, 246, 0.12),
+      transparent 72%
+    ),
+    linear-gradient(180deg, rgba(139, 133, 255, 0.035), transparent 34%),
+    rgba(7, 8, 22, 0.8);
   backdrop-filter: blur(var(--blur-glass));
   -webkit-backdrop-filter: blur(var(--blur-glass));
   z-index: 40;
@@ -43,12 +48,15 @@
   color: var(--text-muted);
   font-size: var(--text-sm);
   line-height: 1;
-  transition: color var(--transition-fast), background var(--transition-fast);
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .navLink:hover {
   color: var(--text-primary);
-  background: var(--glass);
+  background: var(--accent-softer);
 }
 
 .navLink svg {
@@ -57,18 +65,25 @@
 }
 
 .navLink:hover svg {
-  color: var(--text-secondary);
+  color: var(--brand-cyan);
 }
 
 .active,
 .active:hover {
   color: var(--text-primary);
-  background: var(--glass);
-  box-shadow: inset 0 0 0 1px var(--border-subtle);
+  background: linear-gradient(
+    90deg,
+    rgba(139, 92, 246, 0.19),
+    rgba(59, 130, 246, 0.055) 72%,
+    transparent
+  );
+  box-shadow:
+    inset 2px 0 0 var(--brand-violet),
+    inset 0 0 0 1px rgba(167, 139, 250, 0.18);
 }
 
 .active svg {
-  color: var(--text-primary);
+  color: var(--brand-cyan);
 }
 
 .sidebarFoot {
@@ -103,9 +118,11 @@
   width: 30px;
   height: 30px;
   flex: 0 0 auto;
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--accent-border);
   border-radius: 50%;
-  background: var(--glass);
+  background:
+    linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(34, 211, 238, 0.08)),
+    var(--glass);
   color: var(--text-primary);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
@@ -172,7 +189,9 @@
     padding: var(--space-2) var(--space-4);
     border-right: 0;
     border-bottom: 1px solid var(--border-subtle);
-    background: rgba(8, 8, 8, 0.9);
+    background:
+      linear-gradient(90deg, rgba(139, 92, 246, 0.075), transparent 38%),
+      rgba(7, 8, 22, 0.92);
     backdrop-filter: blur(var(--blur-strong));
     -webkit-backdrop-filter: blur(var(--blur-strong));
   }

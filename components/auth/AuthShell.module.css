@@ -15,8 +15,17 @@
   padding: var(--space-12) var(--space-12);
   border-right: 1px solid var(--border-subtle);
   background:
-    radial-gradient(ellipse 80% 50% at 15% 0%, rgba(255, 255, 255, 0.06), transparent 65%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 60%);
+    radial-gradient(
+      ellipse 72% 48% at 12% 0%,
+      rgba(139, 92, 246, 0.16),
+      transparent 66%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 96% 16%,
+      rgba(34, 211, 238, 0.06),
+      transparent 68%
+    ),
+    linear-gradient(180deg, rgba(59, 130, 246, 0.035), transparent 60%);
   overflow: hidden;
 }
 
@@ -25,7 +34,11 @@
   position: absolute;
   inset: auto -30% -40% -30%;
   height: 60%;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.045), transparent 65%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(59, 130, 246, 0.11),
+    transparent 66%
+  );
   pointer-events: none;
 }
 
@@ -86,11 +99,17 @@
   flex-direction: column;
   min-width: 0;
   padding: var(--space-8) var(--space-6) var(--space-12);
+  background:
+    radial-gradient(
+      ellipse 62% 48% at 100% 0%,
+      rgba(34, 211, 238, 0.04),
+      transparent 62%
+    ),
+    var(--background);
 }
 
 .mainTop {
-  display: flex;
-  justify-content: flex-end;
+  display: none;
 }
 
 .mainInner {
@@ -99,7 +118,12 @@
   margin: auto;
   padding-block: var(--space-10);
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-6);
+}
+
+.mainInner > * {
+  min-width: 0;
 }
 
 .heading {
@@ -129,12 +153,12 @@
 .footer a {
   color: var(--text-primary);
   text-decoration: underline;
-  text-decoration-color: var(--border-strong);
+  text-decoration-color: var(--accent-border);
   text-underline-offset: 3px;
 }
 
 .footer a:hover {
-  text-decoration-color: var(--text-primary);
+  text-decoration-color: var(--brand-cyan);
 }
 
 .legal {
@@ -150,56 +174,38 @@
   text-underline-offset: 3px;
 }
 
+/* Tablet and below: the form is the job. Drop the split marketing panel,
+   keep a compact brand header, and put the first field above the fold. */
 @media (max-width: 900px) {
   .page {
     grid-template-columns: 1fr;
   }
 
   .aside {
-    border-right: 0;
-    border-bottom: 1px solid var(--border-subtle);
-    padding: var(--space-8) var(--space-6);
-    gap: var(--space-8);
-  }
-
-  .asideTitle {
-    display: none;
-  }
-
-  .asideBody {
-    font-size: var(--text-base);
-  }
-
-  .asideFoot {
     display: none;
   }
 
   .main {
-    padding-top: var(--space-4);
-  }
-
-  .mainInner {
-    padding-block: var(--space-6) var(--space-10);
-  }
-}
-
-/* Phones: the form is the job. Drop the marketing panel so the first
-   actionable field is visible without a full screen of preamble. */
-@media (max-width: 680px) {
-  .aside {
-    display: none;
-  }
-
-  .main {
-    padding: var(--space-4) var(--space-4) var(--space-10);
+    padding: var(--space-4) var(--space-6) var(--space-10);
   }
 
   .mainTop {
+    display: flex;
     justify-content: flex-start;
   }
 
   .mainInner {
     margin-block: 0 auto;
+    padding-block: var(--space-6) var(--space-10);
+  }
+}
+
+@media (max-width: 680px) {
+  .main {
+    padding: var(--space-4) var(--space-4) var(--space-10);
+  }
+
+  .mainInner {
     padding-block: var(--space-6) var(--space-8);
   }
 }

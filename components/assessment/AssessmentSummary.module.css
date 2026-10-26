@@ -40,8 +40,10 @@
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: var(--space-4);
   padding: var(--space-5);
-  background: var(--glass);
-  border: 1px solid var(--border-subtle);
+  background:
+    linear-gradient(150deg, rgba(139, 92, 246, 0.07), transparent 58%),
+    var(--glass);
+  border: 1px solid var(--accent-border);
   border-radius: var(--radius-lg);
 }
 
@@ -70,7 +72,7 @@
 
 .track {
   height: 4px;
-  background: var(--glass-strong);
+  background: rgba(139, 133, 255, 0.13);
   border-radius: var(--radius-pill);
   overflow: hidden;
 }
@@ -78,8 +80,14 @@
 .fill {
   display: block;
   height: 100%;
-  background: var(--text-primary);
+  background: linear-gradient(
+    90deg,
+    var(--brand-violet),
+    var(--brand-blue),
+    var(--brand-cyan)
+  );
   border-radius: inherit;
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.22);
 }
 
 .skipped {
@@ -96,7 +104,9 @@
   display: grid;
   gap: var(--space-3);
   padding: var(--space-5);
-  background: var(--glass);
+  background:
+    linear-gradient(150deg, rgba(139, 92, 246, 0.035), transparent 58%),
+    var(--glass);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
 }
@@ -165,7 +175,7 @@
   color: var(--text-muted);
   font-size: var(--text-sm);
   line-height: 1.65;
-  border-left: 2px solid var(--border);
+  border-left: 2px solid var(--accent-border);
   padding-left: var(--space-4);
 }
 
@@ -193,5 +203,5 @@
 }
 
 .footLink:hover {
-  color: var(--text-primary);
+  color: var(--brand-cyan);
 }

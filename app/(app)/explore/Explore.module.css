@@ -26,8 +26,10 @@
   display: grid;
   gap: var(--space-4);
   padding: var(--space-5);
-  background: rgba(255, 255, 255, 0.012);
-  border: 1px solid var(--border-subtle);
+  background:
+    linear-gradient(145deg, rgba(139, 92, 246, 0.065), transparent 58%),
+    var(--glass-inset);
+  border: 1px solid var(--accent-border);
   border-radius: var(--radius-lg);
 }
 
@@ -65,7 +67,7 @@
 
 .row:hover {
   background: var(--glass);
-  border-color: var(--border-subtle);
+  border-color: var(--accent-border);
 }
 
 .rowIcon {
@@ -73,7 +75,7 @@
   place-items: center;
   width: 32px;
   height: 32px;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--accent-softer);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xs);
   color: var(--text-muted);

@@ -58,7 +58,7 @@
 }
 
 .panelLink:hover {
-  color: var(--text-primary);
+  color: var(--brand-cyan);
 }
 
 .linkRow {
@@ -131,6 +131,7 @@
   flex: 0 0 auto;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xs);
+  background: var(--accent-softer);
   color: var(--text-faint);
 }
 
@@ -153,9 +154,9 @@
 }
 
 .dangerPanel {
-  border-color: rgba(229, 121, 121, 0.16);
+  border-color: var(--danger-border);
   background:
-    linear-gradient(160deg, rgba(229, 121, 121, 0.035), transparent 55%),
+    linear-gradient(160deg, rgba(251, 113, 133, 0.045), transparent 55%),
     var(--glass);
 }
 

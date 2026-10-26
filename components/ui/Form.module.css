@@ -28,10 +28,11 @@
   width: 100%;
   min-height: 44px;
   padding: 10px var(--space-3);
-  background: rgba(0, 0, 0, 0.22);
+  background: rgba(7, 8, 22, 0.58);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   color: var(--text-primary);
+  caret-color: var(--brand-cyan);
   font-size: var(--text-sm);
   line-height: 1.5;
   transition:
@@ -47,9 +48,11 @@
 
 .input:focus {
   outline: none;
-  border-color: rgba(255, 255, 255, 0.34);
-  background: rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.055);
+  border-color: var(--accent-border);
+  background: rgba(10, 12, 30, 0.72);
+  box-shadow:
+    0 0 0 3px rgba(139, 92, 246, 0.11),
+    0 0 24px rgba(59, 130, 246, 0.06);
 }
 
 .input:disabled {
@@ -58,7 +61,8 @@
 }
 
 .input[aria-invalid="true"] {
-  border-color: rgba(229, 121, 121, 0.5);
+  border-color: var(--danger-border);
+  box-shadow: 0 0 0 3px rgba(251, 113, 133, 0.08);
 }
 
 .textarea {
@@ -81,7 +85,7 @@
 }
 
 .select option {
-  background: #111113;
+  background: var(--surface);
   color: var(--text-primary);
 }
 
@@ -107,7 +111,7 @@
   width: 16px;
   height: 16px;
   margin-top: 3px;
-  accent-color: #e4e4e7;
+  accent-color: var(--brand-violet);
   flex: 0 0 auto;
 }
 

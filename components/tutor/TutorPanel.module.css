@@ -3,13 +3,18 @@
   flex-direction: column;
   min-height: 0;
   background:
+    radial-gradient(
+      ellipse 80% 66% at 100% 0%,
+      rgba(34, 211, 238, 0.045),
+      transparent 64%
+    ),
     linear-gradient(
       165deg,
-      rgba(255, 255, 255, 0.055),
-      rgba(255, 255, 255, 0.012) 42%
+      rgba(139, 92, 246, 0.09),
+      rgba(139, 133, 255, 0.012) 42%
     ),
     var(--glass);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--accent-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-glass), var(--shadow-inset);
   backdrop-filter: blur(var(--blur-glass));
@@ -51,7 +56,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 3px;
   padding: 3px;
-  background: rgba(0, 0, 0, 0.24);
+  background: rgba(7, 8, 22, 0.42);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
 }
@@ -63,17 +68,19 @@
   font-size: var(--text-xs);
   transition:
     background var(--transition-fast),
-    color var(--transition-fast);
+    color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .modeTab:hover {
   color: var(--text-primary);
+  background: var(--accent-softer);
 }
 
 .modeTabActive {
-  background: rgba(255, 255, 255, 0.09);
+  background: var(--accent-soft);
   color: var(--text-primary);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px var(--accent-border);
 }
 
 .thread {
@@ -102,16 +109,16 @@
   width: 24px;
   height: 24px;
   margin-top: 1px;
-  background: rgba(255, 255, 255, 0.055);
+  background: var(--accent-softer);
   border: 1px solid var(--border-subtle);
   border-radius: 7px;
   color: var(--text-secondary);
 }
 
 .userMessage .avatar {
-  background: var(--text-primary);
-  border-color: var(--text-primary);
-  color: var(--text-inverse);
+  background: linear-gradient(135deg, #6d28d9, #4338ca);
+  border-color: var(--accent-border);
+  color: var(--text-on-accent);
 }
 
 .messageBody {
@@ -149,7 +156,7 @@
 
 .messageText :global(code) {
   padding: 1px 4px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--accent-softer);
   border: 1px solid var(--border-subtle);
   border-radius: 4px;
   color: var(--text-primary);
@@ -179,7 +186,7 @@
   gap: var(--space-2);
   margin-top: var(--space-2);
   padding: var(--space-3);
-  background: rgba(255, 255, 255, 0.022);
+  background: var(--accent-softer);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
 }
@@ -257,16 +264,17 @@
   gap: var(--space-2);
   padding: var(--space-3) var(--space-4);
   border-top: 1px solid var(--border-subtle);
-  background: rgba(0, 0, 0, 0.14);
+  background: rgba(7, 8, 22, 0.34);
 }
 
 .input {
   width: 100%;
   padding: var(--space-3);
-  background: rgba(0, 0, 0, 0.26);
+  background: rgba(7, 8, 22, 0.58);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   color: var(--text-primary);
+  caret-color: var(--brand-cyan);
   font-size: var(--text-sm);
   line-height: 1.55;
   resize: vertical;
@@ -274,7 +282,7 @@
 }
 
 .input:focus-visible {
-  border-color: var(--border-strong);
+  border-color: var(--accent-border);
   box-shadow: var(--focus-ring);
 }
 

@@ -6,7 +6,7 @@ export default function WorkspaceLoading() {
   return (
     <RouteState
       icon={LoaderCircle}
-      eyebrow="Workspace"
+      eyebrow="Aelionix Academy"
       title="Loading your evidence"
     >
       <p>

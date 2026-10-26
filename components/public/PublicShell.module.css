@@ -10,7 +10,10 @@
   top: 0;
   z-index: 50;
   border-bottom: 1px solid var(--border-subtle);
-  background: rgba(8, 8, 8, 0.72);
+  background:
+    linear-gradient(180deg, rgba(139, 92, 246, 0.045), transparent 80%),
+    rgba(7, 8, 22, 0.78);
+  box-shadow: 0 1px 0 rgba(167, 139, 250, 0.04);
   backdrop-filter: blur(var(--blur-glass));
   -webkit-backdrop-filter: blur(var(--blur-glass));
 }
@@ -33,13 +36,37 @@
 }
 
 .navLink {
+  position: relative;
+  padding-block: 6px;
   color: var(--text-muted);
   font-size: var(--text-xs);
   transition: color var(--transition-fast);
 }
 
+.navLink::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--brand-violet), var(--brand-cyan));
+  opacity: 0;
+  transform: scaleX(0.35);
+  transform-origin: left;
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-normal);
+}
+
 .navLink:hover {
   color: var(--text-primary);
+}
+
+.navLink:hover::after,
+.navLink:focus-visible::after {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 .actions {
@@ -71,18 +98,25 @@
 
 .secondaryAction:hover {
   color: var(--text-primary);
-  background: var(--glass);
+  background: var(--accent-softer);
 }
 
 .primaryAction {
-  background: var(--text-primary);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  color: var(--text-inverse);
+  background: linear-gradient(135deg, #6d28d9 0%, #4338ca 56%, #1d4ed8 100%);
+  border: 1px solid var(--accent-border);
+  color: var(--text-on-accent);
   font-weight: 500;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.18) inset,
+    0 8px 24px rgba(79, 70, 229, 0.22);
 }
 
 .primaryAction:hover {
-  background: #ffffff;
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 55%, #2563eb 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.22) inset,
+    0 10px 30px rgba(99, 102, 241, 0.3),
+    0 0 22px rgba(34, 211, 238, 0.1);
 }
 
 .main {
@@ -91,7 +125,13 @@
 
 .footer {
   border-top: 1px solid var(--border-subtle);
-  background: rgba(255, 255, 255, 0.012);
+  background:
+    radial-gradient(
+      ellipse 56% 80% at 22% 0%,
+      rgba(139, 92, 246, 0.065),
+      transparent 70%
+    ),
+    rgba(7, 8, 22, 0.36);
   margin-top: var(--space-24);
 }
 
@@ -106,7 +146,7 @@
 
 .footerBrand {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-5);
   align-content: start;
   max-width: 360px;
 }
