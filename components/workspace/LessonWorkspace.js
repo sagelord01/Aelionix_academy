@@ -12,12 +12,16 @@ import {
   Circle,
   Clock3,
   Code2,
+  Compass,
   Eraser,
   FlaskConical,
+  Layers,
   Lightbulb,
   Play,
   Sparkles,
   Terminal,
+  Trophy,
+  X,
 } from "lucide-react";
 import Alert from "@/components/ui/Alert";
 import Badge from "@/components/ui/Badge";
@@ -30,6 +34,7 @@ import ExecutionResult, {
   normalizeAttempt,
 } from "@/components/workspace/ExecutionResult";
 import TutorPanel from "@/components/tutor/TutorPanel";
+import VictoryModal from "@/components/workspace/VictoryModal";
 import { saveDraftAction, startLessonAction } from "@/lib/actions/learning";
 import { postJson } from "@/lib/client/request";
 import { formatMinutes, titleCase } from "@/lib/utils/format";
@@ -175,6 +180,22 @@ export default function LessonWorkspace({
   const previous = currentIndex > 0 ? siblings[currentIndex - 1] : null;
   const next = currentIndex >= 0 ? siblings[currentIndex + 1] : null;
 
+  const [workspaceTab, setWorkspaceTab] = useState("lab");
+  const [tutorOpen, setTutorOpen] = useState(false);
+  const [showVictory, setShowVictory] = useState(false);
+
+  const selectedIndex = lesson.exercises.findIndex(
+    (exercise) => exercise.id === selectedId,
+  );
+  const hasNextExercise =
+    selectedIndex >= 0 && selectedIndex < lesson.exercises.length - 1;
+
+  function handleNextExercise() {
+    if (hasNextExercise) {
+      selectExercise(lesson.exercises[selectedIndex + 1].id);
+    }
+  }
+
   useEffect(() => {
     codeRef.current = codeMap;
     selectedRef.current = selectedId;
@@ -312,6 +333,10 @@ export default function LessonWorkspace({
 
       setSaveState("saved");
       dirtyRef.current = false;
+
+      if (mode === "submit" && (payload.progress?.passed || payload.result?.allTestsPassed)) {
+        setShowVictory(true);
+      }
 
       if (payload.progress?.lessonCompleted) {
         setStatus("completed");
@@ -516,293 +541,508 @@ export default function LessonWorkspace({
         </Alert>
       ) : null}
 
-      <div className={styles.layout}>
-        <div className={styles.main}>
-          <article className={styles.reading}>
-            <div className={styles.readingHead}>
-              <BookOpen size={16} strokeWidth={1.6} aria-hidden="true" />
-              <h2>Read</h2>
-              <span className={styles.readingMeta}>
-                {lesson.content?.sections?.length || 0} sections
+      {/* Smart Mode Switcher Bar */}
+      <div className={styles.modeBar}>
+        <div
+          className={styles.segmentedTabs}
+          role="tablist"
+          aria-label="Lesson workspace modes"
+        >
+          <button
+            type="button"
+            role="tab"
+            aria-selected={workspaceTab === "lab"}
+            className={`${styles.modeTab} ${workspaceTab === "lab" ? styles.modeTabActive : ""}`}
+            onClick={() => setWorkspaceTab("lab")}
+          >
+            <Code2 size={16} />
+            <span>The Code Lab</span>
+            {passedCount > 0 && (
+              <span className={styles.tabBadge}>
+                {passedCount}/{lesson.exercises.length}
               </span>
-            </div>
-            <LessonContent content={lesson.content} />
-          </article>
+            )}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={workspaceTab === "notes"}
+            className={`${styles.modeTab} ${workspaceTab === "notes" ? styles.modeTabActive : ""}`}
+            onClick={() => setWorkspaceTab("notes")}
+          >
+            <BookOpen size={16} />
+            <span>Lesson Theory</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={workspaceTab === "radar"}
+            className={`${styles.modeTab} ${workspaceTab === "radar" ? styles.modeTabActive : ""}`}
+            onClick={() => setWorkspaceTab("radar")}
+          >
+            <Compass size={16} />
+            <span>Concepts & Goals</span>
+          </button>
+        </div>
 
-          <section className={styles.practice} aria-labelledby="practice-title">
-            <div className={styles.practiceHead}>
-              <div>
-                <p className="eyebrow">Practice</p>
-                <h2 id="practice-title" className={styles.practiceTitle}>
-                  Work the problem, then prove it.
-                </h2>
+        <div className={styles.modeActions}>
+          <button
+            type="button"
+            className={`${styles.tutorToggleBtn} ${tutorOpen ? styles.tutorToggleBtnActive : ""}`}
+            onClick={() => setTutorOpen(!tutorOpen)}
+            aria-label="Toggle AI Tutor drawer"
+          >
+            <Sparkles size={15} className={styles.sparkleIcon} />
+            <span>{tutorOpen ? "Hide AI Tutor" : "Ask AI Tutor"}</span>
+            <span className={styles.tutorStatusDot} />
+          </button>
+        </div>
+      </div>
+
+      {/* Tab 1: Lesson Theory Notes */}
+      {workspaceTab === "notes" && (
+        <article className={styles.readingFull}>
+          <div className={styles.readingHead}>
+            <BookOpen size={18} strokeWidth={1.8} aria-hidden="true" />
+            <h2>Lesson Theory & Code Patterns</h2>
+            <span className={styles.readingMeta}>
+              {lesson.content?.sections?.length || 0} sections
+            </span>
+          </div>
+          <LessonContent content={lesson.content} />
+          <div className={styles.tabCallToAction}>
+            <p>Understood the concepts? Put them to work.</p>
+            <Button
+              variant="primary"
+              size="lg"
+              icon={Code2}
+              onClick={() => setWorkspaceTab("lab")}
+            >
+              Start Coding in The Lab →
+            </Button>
+          </div>
+        </article>
+      )}
+
+      {/* Tab 2: Concepts & Goals Radar */}
+      {workspaceTab === "radar" && (
+        <div className={styles.radarCard}>
+          <div className={styles.radarHead}>
+            <Compass size={20} className={styles.radarIcon} />
+            <h2>Concepts & Learning Objectives</h2>
+          </div>
+          <div className={styles.radarGrid}>
+            <div className={styles.radarCol}>
+              <h3 className={styles.radarColTitle}>Assessed Concepts</h3>
+              <div className={styles.conceptList}>
+                {lesson.concepts.map((concept) => (
+                  <div key={concept.id} className={styles.conceptCard}>
+                    <span className={styles.conceptBadge}>{concept.title}</span>
+                    <p className={styles.conceptDesc}>
+                      {concept.description || "Core foundational concept."}
+                    </p>
+                  </div>
+                ))}
               </div>
-              <span className={styles.practiceMeta}>
-                {lesson.exercises.length}{" "}
-                {lesson.exercises.length === 1 ? "exercise" : "exercises"} ·{" "}
-                {passedCount} passed
-              </span>
             </div>
+            <div className={styles.radarCol}>
+              <h3 className={styles.radarColTitle}>Lesson Objectives</h3>
+              <ul className={styles.objectivesList}>
+                {lesson.objectives?.map((objective) => (
+                  <li key={objective} className={styles.objectiveItem}>
+                    <Check size={14} className={styles.checkIcon} />
+                    <span>{objective}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className={styles.tabCallToAction}>
+            <Button
+              variant="primary"
+              size="lg"
+              icon={Code2}
+              onClick={() => setWorkspaceTab("lab")}
+            >
+              Open Exercise Workbench →
+            </Button>
+          </div>
+        </div>
+      )}
 
-            {lesson.exercises.length ? (
-              <>
-                <div
-                  className={styles.exerciseTabs}
-                  role="tablist"
-                  aria-label="Lesson exercises"
-                  onKeyDown={handleExerciseTabKeyDown}
-                >
-                  {lesson.exercises.map((exercise, index) => {
-                    const state = exerciseStates[exercise.id] || {};
-                    const StatusIcon = statusIcons[state.status] || Circle;
-                    return (
-                      <button
-                        key={exercise.id}
-                        type="button"
-                        role="tab"
-                        id={`exercise-tab-${exercise.id}`}
-                        aria-controls="exercise-panel"
-                        aria-selected={selectedId === exercise.id}
-                        tabIndex={selectedId === exercise.id ? 0 : -1}
-                        className={`${styles.exerciseTab} ${selectedId === exercise.id ? styles.exerciseTabActive : ""}`}
-                        onClick={() => selectExercise(exercise.id)}
-                      >
-                        <span
-                          className={`${styles.exerciseStatus} ${styles[state.status] || ""}`}
-                          aria-hidden="true"
-                        >
-                          {state.status === "passed" ? (
-                            <StatusIcon size={12} strokeWidth={2.4} />
-                          ) : (
-                            <span className={styles.tabDot} />
-                          )}
-                        </span>
-                        <span className={styles.exerciseTabText}>
-                          <span className={styles.exerciseTabTitle}>
-                            {index + 1}. {exercise.title}
-                          </span>
-                          <span className={styles.exerciseTabMeta}>
-                            {exerciseStatusLabel[state.status] || "Not started"}
-                            {state.attempts ? ` · ${state.attempts} attempts` : ""}
-                          </span>
-                        </span>
-                      </button>
-                    );
-                  })}
+      {/* Tab 3: The Code Lab */}
+      {workspaceTab === "lab" && (
+        <div
+          className={`${styles.layout} ${tutorOpen ? styles.layoutWithTutor : styles.layoutFull}`}
+        >
+          <div className={styles.main}>
+            <section className={styles.practice} aria-labelledby="practice-title">
+              <div className={styles.practiceHead}>
+                <div>
+                  <p className="eyebrow">Interactive Practice</p>
+                  <h2 id="practice-title" className={styles.practiceTitle}>
+                    {selected ? selected.title : "Work the problem, then prove it."}
+                  </h2>
                 </div>
+                <span className={styles.practiceMeta}>
+                  {lesson.exercises.length}{" "}
+                  {lesson.exercises.length === 1 ? "exercise" : "exercises"} ·{" "}
+                  {passedCount} passed
+                </span>
+              </div>
 
-                {selected ? (
+              {lesson.exercises.length ? (
+                <>
                   <div
-                    className={styles.workbench}
-                    id="exercise-panel"
-                    role="tabpanel"
-                    aria-labelledby={`exercise-tab-${selected.id}`}
+                    className={styles.exerciseTabs}
+                    role="tablist"
+                    aria-label="Lesson exercises"
+                    onKeyDown={handleExerciseTabKeyDown}
                   >
-                    <div className={styles.brief}>
-                      <div className={styles.briefHead}>
-                        <Badge tone="neutral">{titleCase(selected.difficulty)}</Badge>
-                        <span className={styles.saveState}>
-                          {saveState === "saving"
-                            ? "Saving draft…"
-                            : saveState === "saved"
-                              ? "Draft saved"
-                              : saveState === "unsaved"
-                                ? "Unsaved changes"
-                                : "Draft not saved"}
-                        </span>
+                    {lesson.exercises.map((exercise, index) => {
+                      const state = exerciseStates[exercise.id] || {};
+                      const StatusIcon = statusIcons[state.status] || Circle;
+                      return (
+                        <button
+                          key={exercise.id}
+                          type="button"
+                          role="tab"
+                          id={`exercise-tab-${exercise.id}`}
+                          aria-controls="exercise-panel"
+                          aria-selected={selectedId === exercise.id}
+                          tabIndex={selectedId === exercise.id ? 0 : -1}
+                          className={`${styles.exerciseTab} ${selectedId === exercise.id ? styles.exerciseTabActive : ""}`}
+                          onClick={() => selectExercise(exercise.id)}
+                        >
+                          <span
+                            className={`${styles.exerciseStatus} ${styles[state.status] || ""}`}
+                            aria-hidden="true"
+                          >
+                            {state.status === "passed" ? (
+                              <StatusIcon size={12} strokeWidth={2.4} />
+                            ) : (
+                              <span className={styles.tabDot} />
+                            )}
+                          </span>
+                          <span className={styles.exerciseTabText}>
+                            <span className={styles.exerciseTabTitle}>
+                              {index + 1}. {exercise.title}
+                            </span>
+                            <span className={styles.exerciseTabMeta}>
+                              {exerciseStatusLabel[state.status] || "Not started"}
+                              {state.attempts ? ` · ${state.attempts} attempts` : ""}
+                            </span>
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {selected ? (
+                    <div
+                      className={styles.workbench}
+                      id="exercise-panel"
+                      role="tabpanel"
+                      aria-labelledby={`exercise-tab-${selected.id}`}
+                    >
+                      <div className={styles.brief}>
+                        <div className={styles.briefHead}>
+                          <Badge tone="neutral">
+                            {titleCase(selected.difficulty)}
+                          </Badge>
+                          <span className={styles.saveState}>
+                            {saveState === "saving"
+                              ? "Saving draft…"
+                              : saveState === "saved"
+                                ? "Draft saved"
+                                : saveState === "unsaved"
+                                  ? "Unsaved changes"
+                                  : "Draft not saved"}
+                          </span>
+                        </div>
+                        <h3 className={styles.briefTitle}>{selected.title}</h3>
+                        <RichText
+                          text={selected.instructions}
+                          className={styles.instructions}
+                        />
+                        {selected.expected_behavior ? (
+                          <div className={styles.expected}>
+                            <p className={styles.expectedLabel}>
+                              Expected behavior
+                            </p>
+                            <RichText
+                              text={selected.expected_behavior}
+                              className={styles.expectedText}
+                            />
+                          </div>
+                        ) : null}
+
+                        <div className={styles.hints}>
+                          <div className={styles.hintsHead}>
+                            <p className={styles.expectedLabel}>
+                              <Lightbulb size={12} aria-hidden="true" /> Hints
+                            </p>
+                            {selected.hints.length ? (
+                              <span className={styles.hintCount}>
+                                {revealedHints.length}/{selected.hints.length}{" "}
+                                shown
+                              </span>
+                            ) : null}
+                          </div>
+                          {revealedHints.length ? (
+                            <ol className={styles.hintList}>
+                              {revealedHints.map((hint, index) => (
+                                <li key={hint}>
+                                  <span className={styles.hintIndex}>
+                                    {String(index + 1).padStart(2, "0")}
+                                  </span>
+                                  <span>{hint}</span>
+                                </li>
+                              ))}
+                            </ol>
+                          ) : null}
+                          {revealedHints.length < selected.hints.length ? (
+                            <Button
+                              variant="subtle"
+                              size="sm"
+                              icon={Lightbulb}
+                              onClick={revealHint}
+                            >
+                              {revealedHints.length
+                                ? "Reveal another hint"
+                                : "Reveal a hint"}
+                            </Button>
+                          ) : (
+                            <p className={styles.hintsDone}>
+                              All hints revealed. Apply one idea at a time and
+                              run the code.
+                            </p>
+                          )}
+                        </div>
                       </div>
-                      <h3 className={styles.briefTitle}>{selected.title}</h3>
-                      <RichText
-                        text={selected.instructions}
-                        className={styles.instructions}
-                      />
-                      {selected.expected_behavior ? (
-                        <div className={styles.expected}>
-                          <p className={styles.expectedLabel}>Expected behavior</p>
-                          <RichText
-                            text={selected.expected_behavior}
-                            className={styles.expectedText}
+
+                      <div className={styles.editorCol}>
+                        <div className={styles.editorHead}>
+                          <span className={styles.editorLabel}>
+                            <Code2 size={13} aria-hidden="true" /> Python
+                            <span className={styles.editorFile}>
+                              {selected.slug.replace(/-/g, "_")}.py
+                            </span>
+                          </span>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            icon={Eraser}
+                            onClick={resetCode}
+                            disabled={busy != null}
+                          >
+                            Reset to starter
+                          </Button>
+                        </div>
+
+                        <div className={styles.editorSurface}>
+                          <CodeEditor
+                            value={code}
+                            onChange={updateCode}
+                            height={340}
+                            ariaLabel={`Code editor for ${selected.title}`}
                           />
                         </div>
-                      ) : null}
 
-                      <div className={styles.hints}>
-                        <div className={styles.hintsHead}>
-                          <p className={styles.expectedLabel}>
-                            <Lightbulb size={12} aria-hidden="true" /> Hints
+                        <div className={styles.actions}>
+                          <div className={styles.actionButtons}>
+                            <Button
+                              variant="secondary"
+                              icon={Play}
+                              onClick={() => execute("run")}
+                              disabled={
+                                busy != null ||
+                                !executionAvailable ||
+                                !canRunPlayground
+                              }
+                            >
+                              {busy === "run" ? "Running…" : "Run code"}
+                            </Button>
+                            <Button
+                              icon={FlaskConical}
+                              onClick={() => execute("submit")}
+                              disabled={
+                                busy != null ||
+                                !executionAvailable ||
+                                !canRunPlayground
+                              }
+                            >
+                              {busy === "submit" ? "Checking…" : "Run & submit"}
+                            </Button>
+                            {busy ? (
+                              <Spinner size={15} label="Executing code" />
+                            ) : null}
+                          </div>
+                          <p className={styles.actionNote}>
+                            {!canRunPlayground
+                              ? "Exercise checks need SUPABASE_SERVICE_ROLE_KEY on the server. The editor still saves drafts, but nothing will execute."
+                              : executionAvailable
+                                ? "Submission results are graded inside the isolated runner. Hidden checks reveal status only."
+                                : "Isolated execution is not configured, so code cannot run or be graded."}
                           </p>
-                          {selected.hints.length ? (
-                            <span className={styles.hintCount}>
-                              {revealedHints.length}/{selected.hints.length} shown
-                            </span>
-                          ) : null}
                         </div>
-                        {revealedHints.length ? (
-                          <ol className={styles.hintList}>
-                            {revealedHints.map((hint, index) => (
-                              <li key={hint}>
-                                <span className={styles.hintIndex}>
-                                  {String(index + 1).padStart(2, "0")}
-                                </span>
-                                <span>{hint}</span>
-                              </li>
-                            ))}
-                          </ol>
-                        ) : null}
-                        {revealedHints.length < selected.hints.length ? (
-                          <Button
-                            variant="subtle"
-                            size="sm"
-                            icon={Lightbulb}
-                            onClick={revealHint}
-                          >
-                            {revealedHints.length ? "Reveal another hint" : "Reveal a hint"}
-                          </Button>
+
+                        {result ? (
+                          <>
+                            {result.status !== "success" && (
+                              <div className={styles.errorCoachChip}>
+                                <div className={styles.errorCoachText}>
+                                  <Sparkles
+                                    size={14}
+                                    className={styles.errorCoachSparkle}
+                                  />
+                                  <span>
+                                    Need guidance? Get a Socratic hint from the
+                                    AI Coach.
+                                  </span>
+                                </div>
+                                <Button
+                                  variant="secondary"
+                                  size="sm"
+                                  icon={Sparkles}
+                                  onClick={() => setTutorOpen(true)}
+                                >
+                                  Ask Coach
+                                </Button>
+                              </div>
+                            )}
+                            <ExecutionResult result={result} />
+                          </>
                         ) : (
-                          <p className={styles.hintsDone}>
-                            All hints revealed. Apply one idea at a time and run the
-                            code.
-                          </p>
+                          <div className={styles.noResult}>
+                            <Terminal
+                              size={15}
+                              strokeWidth={1.5}
+                              aria-hidden="true"
+                            />
+                            <p>
+                              No execution yet for this exercise. Run your code
+                              to see real output, or submit to grade every check.
+                            </p>
+                          </div>
                         )}
                       </div>
                     </div>
+                  ) : (
+                    <EmptyState icon={Code2} title="No exercise selected">
+                      <p>Choose an exercise above to open the editor.</p>
+                    </EmptyState>
+                  )}
+                </>
+              ) : (
+                <EmptyState icon={BookOpen} title="No published exercises">
+                  <p>
+                    This lesson has no exercises yet, so it cannot be marked
+                    complete through practice. Reading remains available.
+                  </p>
+                </EmptyState>
+              )}
+            </section>
 
-                    <div className={styles.editorCol}>
-                      <div className={styles.editorHead}>
-                        <span className={styles.editorLabel}>
-                          <Code2 size={13} aria-hidden="true" /> Python
-                          <span className={styles.editorFile}>
-                            {selected.slug.replace(/-/g, "_")}.py
-                          </span>
-                        </span>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          icon={Eraser}
-                          onClick={resetCode}
-                          disabled={busy != null}
-                        >
-                          Reset to starter
-                        </Button>
-                      </div>
-
-                      <div className={styles.editorSurface}>
-                        <CodeEditor
-                          value={code}
-                          onChange={updateCode}
-                          height={340}
-                          ariaLabel={`Code editor for ${selected.title}`}
-                        />
-                      </div>
-
-                      <div className={styles.actions}>
-                        <div className={styles.actionButtons}>
-                          <Button
-                            variant="secondary"
-                            icon={Play}
-                            onClick={() => execute("run")}
-                            disabled={busy != null || !executionAvailable || !canRunPlayground}
-                          >
-                            {busy === "run" ? "Running…" : "Run code"}
-                          </Button>
-                          <Button
-                            icon={FlaskConical}
-                            onClick={() => execute("submit")}
-                            disabled={busy != null || !executionAvailable || !canRunPlayground}
-                          >
-                            {busy === "submit" ? "Checking…" : "Run & submit"}
-                          </Button>
-                          {busy ? <Spinner size={15} label="Executing code" /> : null}
-                        </div>
-                        <p className={styles.actionNote}>
-                          {!canRunPlayground
-                            ? "Exercise checks need SUPABASE_SERVICE_ROLE_KEY on the server. The editor still saves drafts, but nothing will execute."
-                            : executionAvailable
-                              ? "Submission results are graded inside the isolated runner. Hidden checks reveal status only."
-                              : "Isolated execution is not configured, so code cannot run or be graded."}
-                        </p>
-                      </div>
-
-                      {result ? (
-                        <ExecutionResult result={result} />
-                      ) : (
-                        <div className={styles.noResult}>
-                          <Terminal size={15} strokeWidth={1.5} aria-hidden="true" />
-                          <p>
-                            No execution yet for this exercise. Run your code to see
-                            real output, or submit to grade every check.
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <EmptyState icon={Code2} title="No exercise selected">
-                    <p>Choose an exercise above to open the editor.</p>
-                  </EmptyState>
-                )}
-              </>
-            ) : (
-              <EmptyState icon={BookOpen} title="No published exercises">
-                <p>
-                  This lesson has no exercises yet, so it cannot be marked complete
-                  through practice. Reading remains available.
-                </p>
-              </EmptyState>
-            )}
-          </section>
-
-          <nav className={styles.lessonNav} aria-label="Lesson navigation">
-            {previous ? (
-              <Link href={`/learn/${previous.slug}`} className={styles.lessonNavLink}>
-                <ArrowLeft size={14} aria-hidden="true" />
-                <span>
-                  <span className={styles.lessonNavLabel}>Previous</span>
-                  <span className={styles.lessonNavTitle}>{previous.title}</span>
-                </span>
-              </Link>
-            ) : (
-              <span />
-            )}
-            {next ? (
-              <Link
-                href={`/learn/${next.slug}`}
-                className={`${styles.lessonNavLink} ${styles.lessonNavNext}`}
-              >
-                <span>
-                  <span className={styles.lessonNavLabel}>Next</span>
-                  <span className={styles.lessonNavTitle}>{next.title}</span>
-                </span>
-                <ArrowRight size={14} aria-hidden="true" />
-              </Link>
-            ) : (
-              <span />
-            )}
-          </nav>
-        </div>
-
-        <aside className={styles.aside}>
-          <div className={styles.tutorSticky}>
-            <TutorPanel
-              initialByMode={tutor}
-              preferredMode={preferredMode}
-              lessonId={lesson.id}
-              exerciseId={selected?.id || null}
-              code={code}
-              currentQuestion={selected?.instructions || ""}
-              aiConfigured={aiConfigured}
-            />
-            <div className={styles.asideNote}>
-              <Sparkles size={13} strokeWidth={1.6} aria-hidden="true" />
-              <p>
-                The tutor sees this exercise, your current draft, and recent
-                recorded execution evidence. It cannot run code or edit your
-                editor.
-              </p>
-            </div>
+            <nav className={styles.lessonNav} aria-label="Lesson navigation">
+              {previous ? (
+                <Link
+                  href={`/learn/${previous.slug}`}
+                  className={styles.lessonNavLink}
+                >
+                  <ArrowLeft size={14} aria-hidden="true" />
+                  <span>
+                    <span className={styles.lessonNavLabel}>Previous</span>
+                    <span className={styles.lessonNavTitle}>
+                      {previous.title}
+                    </span>
+                  </span>
+                </Link>
+              ) : (
+                <span />
+              )}
+              {next ? (
+                <Link
+                  href={`/learn/${next.slug}`}
+                  className={`${styles.lessonNavLink} ${styles.lessonNavNext}`}
+                >
+                  <span>
+                    <span className={styles.lessonNavLabel}>Next</span>
+                    <span className={styles.lessonNavTitle}>{next.title}</span>
+                  </span>
+                  <ArrowRight size={14} aria-hidden="true" />
+                </Link>
+              ) : (
+                <span />
+              )}
+            </nav>
           </div>
-        </aside>
-      </div>
+
+          {/* AI Tutor Drawer / Aside */}
+          {tutorOpen && (
+            <aside className={styles.aside}>
+              <div className={styles.tutorSticky}>
+                <div className={styles.tutorHeaderBar}>
+                  <div className={styles.tutorHeaderTitle}>
+                    <Sparkles size={14} className={styles.sparkleIcon} />
+                    <span>AI Mentor</span>
+                  </div>
+                  <button
+                    type="button"
+                    className={styles.tutorCloseBtn}
+                    onClick={() => setTutorOpen(false)}
+                    aria-label="Close AI Tutor"
+                  >
+                    <X size={15} />
+                  </button>
+                </div>
+                <TutorPanel
+                  initialByMode={tutor}
+                  preferredMode={preferredMode}
+                  lessonId={lesson.id}
+                  exerciseId={selected?.id || null}
+                  code={code}
+                  currentQuestion={selected?.instructions || ""}
+                  aiConfigured={aiConfigured}
+                />
+                <div className={styles.asideNote}>
+                  <Sparkles size={13} strokeWidth={1.6} aria-hidden="true" />
+                  <p>
+                    The tutor sees this exercise, your current draft, and recent
+                    recorded execution evidence. It cannot run code or edit your
+                    editor.
+                  </p>
+                </div>
+              </div>
+            </aside>
+          )}
+        </div>
+      )}
+
+      {/* Floating Action Button for Ambient Tutor */}
+      {!tutorOpen && workspaceTab === "lab" && (
+        <button
+          type="button"
+          className={styles.floatingTutorBtn}
+          onClick={() => setTutorOpen(true)}
+          aria-label="Open AI Tutor"
+        >
+          <span className={styles.floatingPulse} />
+          <Sparkles size={16} className={styles.floatingIcon} />
+          <span>Ask AI Coach</span>
+        </button>
+      )}
+
+      {/* Victory Celebration Modal */}
+      <VictoryModal
+        isOpen={showVictory}
+        onClose={() => setShowVictory(false)}
+        exerciseTitle={selected?.title || "Exercise"}
+        onNextExercise={handleNextExercise}
+        hasNextExercise={hasNextExercise}
+        lessonTitle={lesson.title}
+        nextLessonSlug={next?.slug}
+      />
     </div>
   );
 }

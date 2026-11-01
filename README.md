@@ -1,6 +1,8 @@
 # Aelionix Academy
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sagelord01/Aelionix_academy/blob/main/notebooks/Aelionix_Tutor_Train_and_Serve.ipynb)
+[![Run Live AI Tutor in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sagelord01/Aelionix_academy/blob/main/notebooks/Aelionix_Tutor_Serve_Live.ipynb)
+[![Fine-Tune AI Tutor in Colab](https://img.shields.io/badge/Colab-Retrain_Model-orange?logo=googlecolab)](https://colab.research.google.com/github/sagelord01/Aelionix_academy/blob/main/notebooks/Aelionix_Tutor_Train_and_Serve.ipynb)
+[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-sagelord001%2Faelionix--tutor--qlora-yellow)](https://huggingface.co/sagelord001/aelionix-tutor-qlora)
 
 A production-oriented Python learning platform built with Next.js App Router. It combines a structured curriculum, an adaptive starting-point check, a real code-execution workspace, spaced review, evidence-based mastery, and two deliberately different AI tutor modes.
 
@@ -169,17 +171,19 @@ The two modes use separate conversations, so switching modes never blends their 
 
 To add another provider, implement the small adapter contract in `lib/ai/provider.js` and add its configuration branch in `lib/config/env.js`. UI code does not need to change.
 
-## AI Tutor Fine-Tuning & Colab Sandbox
+## AI Tutor Serving, Retraining & Deployment
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sagelord01/Aelionix_academy/blob/main/notebooks/Aelionix_Tutor_Train_and_Serve.ipynb)
+Aelionix Academy provides a dual-track workflow for running and retraining your custom Socratic AI Tutor:
 
-Aelionix Academy includes a complete, 100% zero-cost workflow to fine-tune `Qwen/Qwen2.5-Coder-7B-Instruct` on the curriculum's pedagogical traces and live-test the model without requiring a local GPU:
+### Option 1: 1-Click Live AI Tutor (Fast Inference Serving from Hugging Face)
 
-- **1-Click Open in Colab**: Click the badge above (or open [`notebooks/Aelionix_Tutor_Train_and_Serve.ipynb`](notebooks/Aelionix_Tutor_Train_and_Serve.ipynb) in Google Colab).
-- **Zero Full-Repo Cloning**: Step 3 in the notebook only downloads the required dataset splits (`data/traces/splits/train.jsonl` and `eval.jsonl`, ~190 KB total)—it does not clone the web application or download heavy frontend/node dependencies.
-- **4-Bit QLoRA Fine-Tuning**: Trains the tutor adapter on a free Tesla T4 GPU in ~8–12 minutes with loss calculated strictly on tutor responses.
-- **Instant Cloudflare Tunnel**: Step 5 spins up an OpenAI-compatible FastAPI server and exposes a public HTTPS tunnel.
-- **Live Local App Testing**: Paste the generated tunnel URL into your local `.env.local`:
+[![Run Live AI Tutor in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sagelord01/Aelionix_academy/blob/main/notebooks/Aelionix_Tutor_Serve_Live.ipynb)
+
+If you just want to run the live AI Tutor against your fine-tuned model weights:
+- **Instant Cloud Download**: Loads [`sagelord001/aelionix-tutor-qlora`](https://huggingface.co/sagelord001/aelionix-tutor-qlora) directly from Hugging Face Hub into 4-bit `Qwen/Qwen2.5-Coder-7B-Instruct` on a free Google Colab T4 GPU.
+- **Zero Dataset Uploads / Zero Retraining Wait**: Ready in **under 90 seconds** (no 15-minute training pass).
+- **Public Cloudflare Tunnel**: Generates a live OpenAI-compatible HTTPS endpoint.
+- **Connect in 1 Step**: Copy the generated lines directly into your local `.env.local`:
   ```bash
   AI_PROVIDER=openai-compatible
   AI_BASE_URL=https://<subdomain>.trycloudflare.com/v1
@@ -187,7 +191,33 @@ Aelionix Academy includes a complete, 100% zero-cost workflow to fine-tune `Qwen
   AI_API_KEY=colab-tunnel
   AI_SUPPORTS_JSON_MODE=true
   ```
-- **Phase 2 Production Rollout**: Step 6 pushes the adapter weights (~100 MB) to Hugging Face Model Hub, ready for serverless hosting on Together AI ($5 free credits = 25,000+ live requests with $0 idle cost).
+
+---
+
+### Option 2: Model Retraining & Fine-Tuning (When New Data Is Collected)
+
+[![Fine-Tune in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sagelord01/Aelionix_academy/blob/main/notebooks/Aelionix_Tutor_Train_and_Serve.ipynb)
+
+Use [`notebooks/Aelionix_Tutor_Train_and_Serve.ipynb`](notebooks/Aelionix_Tutor_Train_and_Serve.ipynb) whenever you collect new pedagogical traces or expand your curriculum:
+- **Lightweight Dataset Fetch**: Downloads only the dataset splits (`data/traces/splits/train.jsonl` and `eval.jsonl`, ~190 KB total)—never clones node modules or heavy web app code.
+- **4-Bit QLoRA Fine-Tuning**: Trains on a free Tesla T4 GPU in ~8–12 minutes with loss calculated strictly on tutor responses.
+- **Hugging Face Hub Sync**: Step 6 automatically pushes your newly trained adapter weights to your Hugging Face account to update or version your model.
+
+---
+
+### Option 3: Phase 2 Serverless Production (Zero-Idle-Cost Deployment)
+
+For live users in production, connect your published Hugging Face adapter ([`sagelord001/aelionix-tutor-qlora`](https://huggingface.co/sagelord001/aelionix-tutor-qlora)) to **Together AI** or **Hugging Face Inference Endpoints**:
+- **Zero Idle Cost**: You pay $0.00 when no students are using the app.
+- **Sub-Second Latency**: Enterprise H100 inference delivers responses in ~0.5 to 0.8 seconds (300+ tokens/sec).
+- **Production Config**:
+  ```bash
+  AI_PROVIDER=openai-compatible
+  AI_BASE_URL=https://api.together.xyz/v1
+  AI_MODEL=sagelord001/aelionix-tutor-qlora
+  AI_API_KEY=your_together_ai_api_key
+  AI_SUPPORTS_JSON_MODE=true
+  ```
 
 ## Execution setup
 

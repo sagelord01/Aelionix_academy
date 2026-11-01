@@ -77,6 +77,28 @@ describe("parseTutorResponse", () => {
     expect(result.code).toBe("empty_response");
     expect(result.response).toBeNull();
   });
+
+  it("recovers gracefully from unescaped quotes inside JSON strings and json prefix", () => {
+    const rawMalformed = `json
+{
+  "message": "The \`name\` variable is correctly set to the string \`"Ada"\`. However, \`is_programmer\` is incorrectly set to \`'True'\`.",
+  "hintLevel": 1,
+  "identifiedIssues": [
+    "The \`is_programmer\` variable is set to string instead of boolean"
+  ],
+  "suggestedNextStep": "Change 'True' to True",
+  "understandingCheck": "What is the difference between string and boolean?",
+  "requiresExecution": false
+}`;
+    const result = parseTutorResponse(rawMalformed);
+    expect(result.ok).toBe(true);
+    expect(result.response.message).toContain('The `name` variable is correctly set');
+    expect(result.response.hintLevel).toBe(1);
+    expect(result.response.identifiedIssues).toHaveLength(1);
+    expect(result.response.suggestedNextStep).toBe("Change 'True' to True");
+    expect(result.response.understandingCheck).toBe("What is the difference between string and boolean?");
+    expect(result.response.requiresExecution).toBe(false);
+  });
 });
 
 describe("tutorResponseSchema", () => {

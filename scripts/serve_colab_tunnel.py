@@ -100,6 +100,8 @@ def load_model_and_tokenizer():
         model = base_model
 
     model.eval()
+    if hasattr(model, "config"):
+        model.config.use_cache = True
     print("[3/3] Model ready for inference!\n")
 
 
@@ -127,11 +129,12 @@ def chat_completions(req: ChatCompletionRequest):
     with torch.no_grad():
         output_ids = model.generate(
             **inputs,
-            max_new_tokens=req.max_tokens,
+            max_new_tokens=min(req.max_tokens, 450),
             temperature=req.temperature,
             do_sample=req.temperature > 0.05,
             pad_token_id=tokenizer.pad_token_id,
             eos_token_id=tokenizer.eos_token_id,
+            use_cache=True,
         )
 
     # Decode only the generated response tokens
@@ -165,20 +168,22 @@ def start_cloudflare_tunnel(port: int):
         os.system("wget -q -nc https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb")
         os.system("dpkg -i cloudflared-linux-amd64.deb > /dev/null 2>&1")
 
-    print("\nStarting Cloudflare Tunnel to expose port", port, "...")
-    process = subprocess.Popen(
-        ["cloudflared", "tunnel", "--url", f"http://127.0.0.1:{port}"],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-    )
+    log_path = Path("/content/tunnel.log") if Path("/content").exists() else Path("tunnel.log")
+    if log_path.exists():
+        log_path.unlink()
+
+    print(f"\nStarting Cloudflare Tunnel to expose port {port}...")
+    os.system(f"nohup cloudflared tunnel --url http://127.0.0.1:{port} --logfile {log_path} > /dev/null 2>&1 &")
 
     tunnel_url = None
-    for line in iter(process.stderr.readline, ""):
-        match = re.search(r"https://[a-zA-Z0-9-]+\.trycloudflare\.com", line)
-        if match:
-            tunnel_url = match.group(0)
-            break
+    for _ in range(25):
+        time.sleep(1)
+        if log_path.exists():
+            content = log_path.read_text(encoding="utf-8", errors="ignore")
+            match = re.search(r"https://[a-zA-Z0-9-]+\.trycloudflare\.com", content)
+            if match:
+                tunnel_url = match.group(0)
+                break
 
     if tunnel_url:
         print("\n" + "=" * 70)
@@ -195,6 +200,8 @@ def start_cloudflare_tunnel(port: int):
         print("=" * 70 + "\n")
     else:
         print("Warning: Could not extract Cloudflare Tunnel URL. Check process output.")
+        if log_path.exists():
+            print(log_path.read_text(encoding="utf-8", errors="ignore"))
 
 
 def main():

@@ -44,6 +44,13 @@ describe("normalizeJudge0Result", () => {
     );
   });
 
+  it("marks async token responses without a status as pending/not finished", () => {
+    const result = normalizeJudge0Result({ token: "async-token-123" });
+    expect(result.status).toBe("processing");
+    expect(result.finished).toBe(false);
+    expect(result.providerSubmissionId).toBe("async-token-123");
+  });
+
   it("treats a compiler-reported SyntaxError as a syntax error", () => {
     const result = normalizeJudge0Result({
       status: { id: 3, description: "Accepted" },
