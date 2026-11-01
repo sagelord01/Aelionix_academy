@@ -272,6 +272,61 @@ export default function TutorPanel({
         </Alert>
       ) : null}
 
+      <div className={styles.chips} role="group" aria-label="Quick tutor prompts">
+        <button
+          type="button"
+          className={styles.chip}
+          disabled={!aiConfigured || sending}
+          onClick={() =>
+            setInputs((current) => ({
+              ...current,
+              [mode]: "Can you spot any bugs in my current code?",
+            }))
+          }
+        >
+          🔍 Spot bugs
+        </button>
+        <button
+          type="button"
+          className={styles.chip}
+          disabled={!aiConfigured || sending}
+          onClick={() =>
+            setInputs((current) => ({
+              ...current,
+              [mode]: "Give me a small hint on what to try next.",
+            }))
+          }
+        >
+          💡 Next hint
+        </button>
+        <button
+          type="button"
+          className={styles.chip}
+          disabled={!aiConfigured || sending}
+          onClick={() =>
+            setInputs((current) => ({
+              ...current,
+              [mode]: "Test my understanding with a quick conceptual question.",
+            }))
+          }
+        >
+          🧠 Test understanding
+        </button>
+        <button
+          type="button"
+          className={styles.chip}
+          disabled={!aiConfigured || sending}
+          onClick={() =>
+            setInputs((current) => ({
+              ...current,
+              [mode]: "Explain what my code is doing step-by-step.",
+            }))
+          }
+        >
+          📖 Explain code
+        </button>
+      </div>
+
       <form className={styles.composer} onSubmit={handleSubmit}>
         <label className="sr-only" htmlFor="tutor-input">
           Message the {copy.label}

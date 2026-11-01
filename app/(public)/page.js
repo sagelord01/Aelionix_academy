@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
+import HeroDemoSandbox from "@/components/homepage/HeroDemoSandbox";
 import { pythonTrack } from "@/data/curriculum/python";
 import { titleCase } from "@/lib/utils/format";
 import styles from "./Home.module.css";
@@ -109,38 +110,7 @@ export default function HomePage() {
           </dl>
         </div>
 
-        <div
-          className={styles.curriculumMap}
-          role="group"
-          aria-label="Curriculum overview"
-        >
-          <div className={styles.mapHead}>
-            <span className={styles.mapLabel}>Curriculum map</span>
-            <span className={styles.mapMeta}>python-foundations</span>
-          </div>
-          <ol className={styles.mapList}>
-            {lessons.map((lesson) => (
-              <li key={lesson.slug} className={styles.mapRow}>
-                <span className={styles.mapIndex}>
-                  {String(lesson.position).padStart(2, "0")}
-                </span>
-                <span className={styles.mapBody}>
-                  <span className={styles.mapTitle}>{lesson.title}</span>
-                  <span className={styles.mapConcepts}>
-                    {lesson.concepts.slice(0, 3).join(" · ")}
-                  </span>
-                </span>
-                <span className={styles.mapMinutes}>{lesson.estimatedMinutes}m</span>
-              </li>
-            ))}
-          </ol>
-          <div className={styles.mapFoot}>
-            <span>Each lesson ends in runnable exercises.</span>
-            <Link href="#curriculum">
-              Inspect the path <ArrowRight size={13} aria-hidden="true" />
-            </Link>
-          </div>
-        </div>
+        <HeroDemoSandbox />
       </section>
 
       <section className={styles.strip} aria-label="Core principles">

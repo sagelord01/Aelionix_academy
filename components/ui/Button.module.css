@@ -62,26 +62,29 @@
 
 /* Variants */
 .primary {
-  background: linear-gradient(135deg, #6d28d9 0%, #4338ca 56%, #1d4ed8 100%);
-  border-color: rgba(196, 181, 253, 0.38);
-  color: var(--text-on-accent);
+  background: linear-gradient(135deg, #9333ea 0%, #2563eb 50%, #00d2eb 100%);
+  border-color: rgba(0, 245, 255, 0.45);
+  color: #ffffff;
+  font-weight: 600;
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.2) inset,
-    0 10px 30px rgba(79, 70, 229, 0.28);
+    0 1px 0 rgba(255, 255, 255, 0.3) inset,
+    0 8px 25px rgba(0, 245, 255, 0.25),
+    0 0 20px rgba(147, 51, 234, 0.28);
 }
 
 .primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 55%, #2563eb 100%);
-  border-color: rgba(221, 214, 254, 0.5);
+  background: linear-gradient(135deg, #a855f7 0%, #3b82f6 50%, #00f5ff 100%);
+  border-color: rgba(255, 255, 255, 0.8);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.24) inset,
-    0 12px 38px rgba(99, 102, 241, 0.36),
-    0 0 26px rgba(34, 211, 238, 0.12);
+    0 1px 0 rgba(255, 255, 255, 0.45) inset,
+    0 10px 32px rgba(0, 245, 255, 0.45),
+    0 0 35px rgba(168, 85, 247, 0.4);
+  transform: translateY(-1px);
 }
 
 .secondary {
   background:
-    linear-gradient(145deg, rgba(139, 133, 255, 0.07), transparent 70%),
+    linear-gradient(145deg, rgba(0, 245, 255, 0.06), transparent 70%),
     var(--glass);
   border-color: var(--border);
   color: var(--text-primary);
@@ -91,9 +94,10 @@
 
 .secondary:hover:not(:disabled) {
   background:
-    linear-gradient(145deg, rgba(139, 133, 255, 0.13), transparent 70%),
+    linear-gradient(145deg, rgba(0, 245, 255, 0.14), transparent 70%),
     var(--glass-strong);
-  border-color: var(--accent-border);
+  border-color: var(--brand-cyan);
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
 }
 
 .ghost {

@@ -70,20 +70,22 @@
 
 .active,
 .active:hover {
-  color: var(--text-primary);
+  color: #ffffff;
   background: linear-gradient(
     90deg,
-    rgba(139, 92, 246, 0.19),
-    rgba(59, 130, 246, 0.055) 72%,
-    transparent
+    rgba(0, 245, 255, 0.16) 0%,
+    rgba(168, 85, 247, 0.08) 60%,
+    transparent 100%
   );
   box-shadow:
-    inset 2px 0 0 var(--brand-violet),
-    inset 0 0 0 1px rgba(167, 139, 250, 0.18);
+    inset 3px 0 0 var(--brand-cyan),
+    0 0 16px rgba(0, 245, 255, 0.2),
+    inset 0 0 0 1px rgba(0, 245, 255, 0.22);
 }
 
 .active svg {
   color: var(--brand-cyan);
+  filter: drop-shadow(0 0 6px rgba(0, 245, 255, 0.6));
 }
 
 .sidebarFoot {

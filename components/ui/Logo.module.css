@@ -27,12 +27,13 @@
   width: auto;
   height: 34px;
   object-fit: contain;
-  filter: drop-shadow(0 0 14px rgba(59, 130, 246, 0.2));
-  transition: filter var(--transition-fast);
+  filter: drop-shadow(0 0 12px rgba(0, 245, 255, 0.45)) drop-shadow(0 0 24px rgba(168, 85, 247, 0.3));
+  transition: filter var(--transition-fast), transform var(--transition-fast);
 }
 
 .logo:hover .image {
-  filter: drop-shadow(0 0 18px rgba(139, 92, 246, 0.34));
+  transform: scale(1.03);
+  filter: drop-shadow(0 0 18px rgba(0, 245, 255, 0.7)) drop-shadow(0 0 32px rgba(217, 70, 239, 0.45));
 }
 
 .wordmark {
@@ -42,22 +43,26 @@
 }
 
 .name {
-  color: var(--text-primary);
-  font-size: 0.84rem;
-  font-weight: 600;
-  letter-spacing: 0.105em;
+  background: linear-gradient(135deg, #ffffff 15%, #00f0ff 65%, #e879f9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   line-height: 1;
   text-transform: uppercase;
 }
 
 .descriptor {
-  color: var(--text-muted);
+  color: var(--brand-cyan);
   font-family: var(--font-mono);
-  font-size: 0.54rem;
-  font-weight: 500;
-  letter-spacing: 0.34em;
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.36em;
   line-height: 1;
   text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(0, 245, 255, 0.4);
 }
 
 .full {
@@ -72,11 +77,11 @@
 .full .image {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 0 22px rgba(59, 130, 246, 0.18));
+  filter: drop-shadow(0 0 20px rgba(0, 245, 255, 0.4)) drop-shadow(0 0 35px rgba(168, 85, 247, 0.25));
 }
 
 .full:hover .image {
-  filter: drop-shadow(0 0 28px rgba(139, 92, 246, 0.3));
+  filter: drop-shadow(0 0 28px rgba(0, 245, 255, 0.65)) drop-shadow(0 0 45px rgba(217, 70, 239, 0.4));
 }
 
 @media (max-width: 680px) {
