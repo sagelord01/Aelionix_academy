@@ -651,6 +651,269 @@ height_m = 1.68
       requiresExecution: false,
     },
   },
+
+{
+  "id": "word-frequencies-key-error",
+  "split": "train",
+  "mode": "coach",
+  "lesson_slug": "dictionaries-and-lookups",
+  "exercise_slug": "word-frequencies",
+  "trace_type": "bug_diagnosis",
+  "question": "I get a KeyError the moment I run my loop on a new word. Doesn't counts[word] += 1 create the key automatically?",
+  "code": "def count_words(text):\n    counts = {}\n    for word in text.lower().split():\n        counts[word] += 1\n    return counts\n",
+  "execution": {
+    "status": "runtime_error",
+    "stderr": "KeyError: 'python'",
+    "failed": [
+      "counts words in a sentence"
+    ]
+  },
+  "target": {
+    "message": "In Python, `counts[word] += 1` evaluates `counts[word]` on the right-hand side first before storing anything back. If the key isn't in the dictionary yet, reading it raises `KeyError` immediately.\n\nSo before you can add 1, you need to decide what count a brand-new word starts with.\n\nWhat are the two ways Python lets you check or provide a default for a key that might not exist yet?",
+    "hintLevel": 1,
+    "identifiedIssues": [
+      "`counts[word] += 1` reads `counts[word]` before it exists, raising a KeyError."
+    ],
+    "suggestedNextStep": "Check `if word in counts:` before incrementing, or use `counts.get(word, 0)`.",
+    "understandingCheck": "Why does `counts['new'] = 1` succeed without an error, but `counts['new'] += 1` raises a KeyError?",
+    "requiresExecution": true
+  }
+},
+
+{
+  "id": "inventory-total-skip-missing",
+  "split": "train",
+  "mode": "coach",
+  "lesson_slug": "dictionaries-and-lookups",
+  "exercise_slug": "inventory-total",
+  "trace_type": "bug_diagnosis",
+  "question": "My loop works for complete inventories, but crashes whenever an item is in stock but has no price listed.",
+  "code": "def calculate_total(stock, prices):\n    total = 0.0\n    for item, qty in stock.items():\n        total += qty * prices[item]\n    return total\n",
+  "execution": {
+    "status": "runtime_error",
+    "stderr": "KeyError: 'battery'",
+    "failed": [
+      "skips items missing from prices"
+    ]
+  },
+  "target": {
+    "message": "Take a close look at `prices[item]`. The instructions explicitly state that items missing from either dictionary should be skipped.\n\nWhen an item exists in `stock` but has no entry in `prices`, accessing `prices[item]` directly fails with `KeyError`.\n\nWhat check can you put inside the loop to ensure an item is present in `prices` before computing its subtotal?",
+    "hintLevel": 1,
+    "identifiedIssues": [
+      "Accessing `prices[item]` without checking if `item in prices` raises a KeyError on missing prices."
+    ],
+    "suggestedNextStep": "Add an `if item in prices:` guard before adding to the total.",
+    "understandingCheck": "What would happen if an item was in `prices` but not in `stock` under this loop?",
+    "requiresExecution": true
+  }
+},
+
+{
+  "id": "apply-discount-print-instead-of-return",
+  "split": "train",
+  "mode": "coach",
+  "lesson_slug": "functions-and-parameters",
+  "exercise_slug": "apply-discount",
+  "trace_type": "bug_diagnosis",
+  "question": "The formula is correct and the console shows 80.0, but all the test assertions are failing with None.",
+  "code": "def apply_discount(price, discount_pct):\n    if price < 0 or not (0 <= discount_pct <= 100):\n        raise ValueError(\"Invalid input\")\n    final_price = round(price * (1 - discount_pct / 100), 2)\n    print(final_price)\n",
+  "execution": {
+    "status": "test_failure",
+    "failed": [
+      "returns discounted price",
+      "rounds to two decimals"
+    ]
+  },
+  "target": {
+    "message": "`print()` displays text in the output console for human eyes, but it does not send data back to the calling code or test runner.\n\nIn Python, any function that finishes without an explicit `return` automatically returns `None`. That is why the console shows the number, but every assertion receives `None`.\n\nWhat keyword hands the calculated value back to the caller?",
+    "hintLevel": 1,
+    "identifiedIssues": [
+      "The function uses `print(final_price)` instead of returning `final_price`, causing it to evaluate to `None`."
+    ],
+    "suggestedNextStep": "Replace `print(final_price)` with `return final_price` and run the tests.",
+    "understandingCheck": "What is the fundamental difference between displaying a value on screen and returning it from a function?",
+    "requiresExecution": true
+  }
+},
+
+{
+  "id": "price-helper-module-constant",
+  "split": "train",
+  "mode": "coach",
+  "lesson_slug": "modules-and-reuse",
+  "exercise_slug": "price-helper",
+  "trace_type": "bug_diagnosis",
+  "question": "The tests say TAX_RATE is missing, but I used 0.2 inside my with_tax function. Why is it failing?",
+  "code": "def with_tax(price):\n    tax_rate = 0.2\n    return round(price * (1 + tax_rate), 2)\n\ndef format_price(price):\n    return f\"${price:.2f}\"\n",
+  "execution": {
+    "status": "test_failure",
+    "failed": [
+      "TAX_RATE is 0.2",
+      "TAX_RATE is defined at module level"
+    ]
+  },
+  "target": {
+    "message": "Notice where `tax_rate` is currently defined: it lives inside the body of `with_tax()`, making it a local variable that vanishes as soon as the function returns.\n\nThe exercise requires a module-level constant named `TAX_RATE = 0.2`. A module-level name is defined at the top level of the file, outside any function.\n\nHow do you declare a constant so that both other functions and external test files can import it directly?",
+    "hintLevel": 2,
+    "identifiedIssues": [
+      "`TAX_RATE` is defined as a local variable inside `with_tax` rather than at the module's top level."
+    ],
+    "suggestedNextStep": "Move `TAX_RATE = 0.2` to the top of the file outside any function definition.",
+    "understandingCheck": "Why can't an external file or test import a variable that was defined inside a function?",
+    "requiresExecution": true
+  }
+},
+
+{
+  "id": "bank-account-missing-self-param",
+  "split": "train",
+  "mode": "coach",
+  "lesson_slug": "classes-and-objects",
+  "exercise_slug": "bank-account",
+  "trace_type": "bug_diagnosis",
+  "question": "When I call account.deposit(50), Python gives me: TypeError: deposit() takes 1 positional argument but 2 were given. I only passed 50!",
+  "code": "class BankAccount:\n    def __init__(self, initial_balance=0):\n        if initial_balance < 0:\n            raise ValueError(\"Negative initial balance\")\n        self.balance = initial_balance\n\n    def deposit(amount):\n        if amount <= 0:\n            raise ValueError(\"Amount must be positive\")\n        self.balance += amount\n",
+  "execution": {
+    "status": "runtime_error",
+    "stderr": "TypeError: deposit() takes 1 positional argument but 2 were given",
+    "failed": [
+      "deposit adds a positive amount"
+    ]
+  },
+  "target": {
+    "message": "When you call a method on an instance like `account.deposit(50)`, Python secretly passes the instance itself as the very first argument: `BankAccount.deposit(account, 50)`.\n\nBecause your `deposit` method only declared `(amount)`, Python received 2 arguments (the account instance and the number 50), which triggers that exact `TypeError`.\n\nWhat special parameter must every instance method declare as its first argument so it knows which object it belongs to?",
+    "hintLevel": 2,
+    "identifiedIssues": [
+      "`deposit` method definition is missing the `self` parameter as its first argument."
+    ],
+    "suggestedNextStep": "Change the method signature to `def deposit(self, amount):`.",
+    "understandingCheck": "Why does `__init__` require `self`, and what does `self` actually point to?",
+    "requiresExecution": true
+  }
+},
+
+{
+  "id": "expense-report-missing-keys",
+  "split": "train",
+  "mode": "coach",
+  "lesson_slug": "practical-project",
+  "exercise_slug": "expense-report",
+  "trace_type": "bug_diagnosis",
+  "question": "It totals up the expenses, but crashes when a record is missing the category key. How should I guard against that?",
+  "code": "def build_report(records):\n    total = 0.0\n    by_category = {}\n    for record in records:\n        cat = record[\"category\"]\n        amt = record[\"amount\"]\n        total += amt\n        by_category[cat] = by_category.get(cat, 0.0) + amt\n    return {\"total\": round(total, 2), \"by_category\": by_category, \"count\": len(records)}\n",
+  "execution": {
+    "status": "test_failure",
+    "failed": [
+      "raises ValueError on missing keys"
+    ]
+  },
+  "target": {
+    "message": "When a record lacks the required keys, `record[\"category\"]` immediately raises a `KeyError`. But look closely at the project specifications: the instructions require raising a `ValueError` with a clear message when a key is missing.\n\nBefore reading the values, how can you verify that both `\"category\"` and `\"amount\"` exist in `record`?\n\nIf either key is absent, raise `ValueError` before modifying any running totals.",
+    "hintLevel": 1,
+    "identifiedIssues": [
+      "Missing dictionary keys raise an unhandled `KeyError` instead of the required `ValueError`."
+    ],
+    "suggestedNextStep": "Add a check at the start of the loop: `if \"category\" not in record or \"amount\" not in record: raise ValueError(...)`.",
+    "understandingCheck": "Why is raising a deliberate `ValueError` with an explanatory message better than letting an internal `KeyError` escape to users?",
+    "requiresExecution": true
+  }
+},
+
+{
+  "id": "partner-plan-inventory-total",
+  "split": "train",
+  "mode": "partner",
+  "lesson_slug": "dictionaries-and-lookups",
+  "exercise_slug": "inventory-total",
+  "trace_type": "collaborative_plan",
+  "question": "Can we plan out how to calculate the inventory total? I'm not sure how to loop over two dictionaries at once.",
+  "code": "",
+  "execution": null,
+  "target": {
+    "message": "We don't actually need to loop over both dictionaries simultaneously! Here is a clean way to break it down together:\n\n1. Start with an accumulator variable: `total = 0`.\n2. Loop over the items in `stock` using `for item, quantity in stock.items():`.\n3. Inside the loop, check if that `item` is also in `prices`. If it is, multiply `quantity * prices[item]` and add it to `total`.\n4. If it isn't in `prices`, do nothing (this automatically skips missing items as required!).\n5. Finally, return `round(total, 2)`.\n\nTake a look at step 2 and 3—does iterating over `stock.items()` make sense, or would you prefer iterating over keys?",
+    "hintLevel": null,
+    "identifiedIssues": [],
+    "suggestedNextStep": "Write the function header and the loop over `stock.items()`, checking `if item in prices:` inside.",
+    "understandingCheck": "Why is checking `item in prices` safer than calling `prices[item]` directly?",
+    "requiresExecution": false
+  }
+},
+
+{
+  "id": "partner-plan-expense-report",
+  "split": "train",
+  "mode": "partner",
+  "lesson_slug": "practical-project",
+  "exercise_slug": "expense-report",
+  "trace_type": "collaborative_plan",
+  "question": "This final project has a lot of requirements: validation, category totals, rounding. How should we structure the function?",
+  "code": "",
+  "execution": null,
+  "target": {
+    "message": "Let's decompose this into four sequential steps so it's easy to manage:\n\n1. **Early Return**: If `not records`, immediately return `{\"total\": 0, \"by_category\": {}, \"count\": 0}`.\n2. **Setup**: Initialize `total = 0.0` and an empty dictionary `by_category = {}`.\n3. **Loop & Validate**: Iterate through each `record` in `records`:\n   - Check if `\"category\"` and `\"amount\"` keys exist (raise `ValueError` if missing).\n   - Check if `amount < 0` (raise `ValueError` if negative).\n   - Add `amount` to `total`.\n   - Accumulate into `by_category[category]` using `.get(category, 0.0) + amount`.\n4. **Format & Return**: Round `total` to 2 decimals, round each value in `by_category` to 2 decimals, and return the dictionary.\n\nLet's start with step 1 and the validation loop. Want to draft that first?",
+    "hintLevel": null,
+    "identifiedIssues": [],
+    "suggestedNextStep": "Write the empty-list guard and the validation checks inside the loop.",
+    "understandingCheck": "Why is it important to validate every record before committing partial calculations?",
+    "requiresExecution": false
+  }
+},
+
+{
+  "id": "eval-classes-attribute-error",
+  "split": "eval",
+  "mode": "coach",
+  "lesson_slug": "classes-and-objects",
+  "exercise_slug": "bank-account",
+  "trace_type": "bug_diagnosis",
+  "question": "I created the BankAccount instance, but when I check account.balance I get AttributeError: 'BankAccount' object has no attribute 'balance'.",
+  "code": "class BankAccount:\n    def __init__(self, initial_balance=0):\n        if initial_balance < 0:\n            raise ValueError(\"Negative initial balance\")\n        balance = initial_balance\n",
+  "execution": {
+    "status": "runtime_error",
+    "stderr": "AttributeError: 'BankAccount' object has no attribute 'balance'",
+    "failed": [
+      "balance is readable as an attribute"
+    ]
+  },
+  "target": {
+    "message": "Look at how `balance` is assigned inside `__init__`: `balance = initial_balance` creates a temporary local variable named `balance`. Once `__init__` finishes running, that local variable is discarded.\n\nTo make `balance` persist as an attribute on the instance itself so you can read `account.balance` later, you have to attach it to the instance.\n\nWhat keyword inside `__init__` refers to the instance being created?",
+    "hintLevel": 1,
+    "identifiedIssues": [
+      "`balance = initial_balance` creates a local variable instead of assigning to the instance attribute `self.balance`."
+    ],
+    "suggestedNextStep": "Change the assignment to `self.balance = initial_balance`.",
+    "understandingCheck": "What is the difference between a local variable inside a method and an attribute on `self`?",
+    "requiresExecution": true
+  }
+},
+
+{
+  "id": "eval-dict-mutable-iteration",
+  "split": "eval",
+  "mode": "coach",
+  "lesson_slug": "dictionaries-and-lookups",
+  "exercise_slug": "word-frequencies",
+  "trace_type": "bug_diagnosis",
+  "question": "I tried deleting short words from my dictionary while looping through it, and got RuntimeError: dictionary changed size during iteration.",
+  "code": "def remove_short_words(counts):\n    for word in counts:\n        if len(word) < 3:\n            del counts[word]\n    return counts\n",
+  "execution": {
+    "status": "runtime_error",
+    "stderr": "RuntimeError: dictionary changed size during iteration",
+    "failed": [
+      "removes short words"
+    ]
+  },
+  "target": {
+    "message": "Python does not allow you to add or remove keys from a dictionary while iterating directly over it, because modifying the collection disrupts the internal hash table iterator.\n\nTo safely delete keys, the loop must iterate over a *fixed snapshot* of the keys rather than the live dictionary that's being modified.\n\nHow can you make a separate list of keys to loop through before deleting items from the dictionary?",
+    "hintLevel": 1,
+    "identifiedIssues": [
+      "Deleting keys from `counts` while actively iterating over `counts` causes a RuntimeError."
+    ],
+    "suggestedNextStep": "Iterate over `list(counts.keys())` instead of `counts` directly.",
+    "understandingCheck": "Why does iterating over `list(counts)` allow you to delete keys from `counts` without crashing?",
+    "requiresExecution": true
+  }
+}
 ];
 
 export default scenarios;

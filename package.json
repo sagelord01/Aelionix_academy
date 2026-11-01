@@ -12,6 +12,7 @@
     "seed:generate": "node scripts/generate-seed.mjs",
     "traces:build": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-training-traces.mjs",
     "traces:validate": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/validate-training-traces.mjs",
+    "traces:export-google": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/export-google-ai-studio.mjs",
     "bench:eval-prompts": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-eval-prompts.mjs"
   },
   "dependencies": {
