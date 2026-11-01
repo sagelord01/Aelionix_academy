@@ -1,0 +1,87 @@
+{
+  "_comment": "Per-benchmark-case inputs rendered through the app's real prompt builders. contamination=held_out means the case never appears in the training set; seen_in_training means the same exercise does, so treat it as a regression check rather than a generalisation result.",
+  "py_eval_001": {
+    "contamination": "held_out",
+    "lesson_slug": null,
+    "exercise_slug": null,
+    "code": "def add_item(item, my_list=[]) :\n    my_list.append(item)\n    return my_list",
+    "question": "I called add_item(1) twice in different functions, but the list keeps accumulating items from previous calls. Why is it remembering old data?",
+    "execution": null
+  },
+  "py_eval_002": {
+    "contamination": "held_out",
+    "lesson_slug": null,
+    "exercise_slug": null,
+    "code": "def factorial(n):\n    # I know it needs a base case, but I keep getting a RecursionError\n    return n * factorial(n - 1)",
+    "question": "I know it needs a base case but I keep getting a RecursionError. Where do I even start?",
+    "execution": {
+      "status": "runtime_error",
+      "stderr": "RecursionError: maximum recursion depth exceeded"
+    }
+  },
+  "cc_fix_average_broken": {
+    "contamination": "seen_in_training",
+    "lesson_slug": "debugging-and-errors",
+    "exercise_slug": "fix-the-average",
+    "code": "def average(values):\n    if not values:\n        return 0\n    return sum(values) / len(values)\n",
+    "question": "My empty-list test fails but everything else passes. What am I missing?",
+    "execution": {
+      "status": "test_failure",
+      "failed": [
+        "returns None for an empty list"
+      ]
+    }
+  },
+  "cc_first_item_broken": {
+    "contamination": "seen_in_training",
+    "lesson_slug": "debugging-and-errors",
+    "exercise_slug": "first-item",
+    "code": "def first_item(items, fallback=None):\n    # Return the first item or the fallback\n    return items[0]\n",
+    "question": "It works for normal lists but blows up on the empty one. What should I look at first?",
+    "execution": {
+      "status": "runtime_error",
+      "stderr": "IndexError: list index out of range",
+      "failed": [
+        "returns None by default",
+        "respects a custom fallback"
+      ]
+    }
+  },
+  "cc_safe_divide_broken": {
+    "contamination": "seen_in_training",
+    "lesson_slug": "files-and-exceptions",
+    "exercise_slug": "safe-divide",
+    "code": "def safe_divide(a, b):\n    return a / b\n",
+    "question": "Where is the right place to handle this? I don't want to catch everything.",
+    "execution": {
+      "status": "runtime_error",
+      "stderr": "ZeroDivisionError: division by zero",
+      "failed": [
+        "returns None for zero divisor"
+      ]
+    }
+  },
+  "pa_unmapped_passes_no_credit": {
+    "contamination": "held_out",
+    "lesson_slug": null,
+    "exercise_slug": null,
+    "code": "print('hello')",
+    "question": "My code passed, but I got no mastery credit. Why?",
+    "execution": {
+      "status": "success",
+      "stdout": "hello\n",
+      "test_results": []
+    }
+  },
+  "tone_typo_missing_colon": {
+    "contamination": "held_out",
+    "lesson_slug": "functions-and-parameters",
+    "exercise_slug": "safe-average",
+    "code": "def average(values, default=0.0):\n    if not values\n        return default\n    return sum(values) / len(values)\n",
+    "question": "it won't even run and I can't see what's wrong with that line",
+    "execution": {
+      "status": "runtime_error",
+      "stderr": "SyntaxError: expected ':'"
+    }
+  }
+}

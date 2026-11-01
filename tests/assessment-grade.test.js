@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   acceptedValues,
+  describeAcceptedAnswer,
   describeResponse,
   gradeTextOrChoice,
   matchesTextAnswer,
@@ -46,6 +47,33 @@ describe("matchesTextAnswer", () => {
   it("rejects empty submissions", () => {
     expect(matchesTextAnswer({ value: "anything" }, "   ")).toBe(false);
     expect(matchesTextAnswer({ value: "anything" }, undefined)).toBe(false);
+    expect(matchesTextAnswer(undefined, "anything")).toBe(false);
+  });
+
+  it("matches keyword thresholds for short-answer keys", () => {
+    const answer = {
+      keywords: ["average", "grade", "function", "validate", "input"],
+      minMatches: 2,
+    };
+
+    expect(
+      matchesTextAnswer(
+        answer,
+        "Split validation of the input from calculating the average and mapping a grade.",
+      ),
+    ).toBe(true);
+    expect(matchesTextAnswer(answer, "Compute the average and grade.")).toBe(
+      true,
+    );
+    expect(matchesTextAnswer(answer, "Use a function.")).toBe(false);
+    expect(matchesTextAnswer(answer, "Average the upgrade.")).toBe(false);
+  });
+
+  it("defaults keyword keys to one match", () => {
+    expect(matchesTextAnswer({ keywords: ["loop"] }, "Use a loop.")).toBe(true);
+    expect(matchesTextAnswer({ keywords: ["loop"] }, "Use iteration.")).toBe(
+      false,
+    );
   });
 });
 
@@ -88,6 +116,52 @@ describe("gradeTextOrChoice", () => {
   it("returns false without a question or key", () => {
     expect(gradeTextOrChoice(null, {}, {})).toBe(false);
     expect(gradeTextOrChoice(multipleChoice, null, {})).toBe(false);
+  });
+});
+
+describe("describeAcceptedAnswer", () => {
+  it("resolves multiple-choice option text", () => {
+    expect(
+      describeAcceptedAnswer(
+        {
+          type: "multiple_choice",
+          options: [
+            { id: "0", text: "First" },
+            { id: "1", text: "Second" },
+          ],
+        },
+        { optionId: "1" },
+      ),
+    ).toBe("Second");
+
+    expect(
+      describeAcceptedAnswer(
+        { type: "multiple_choice", options: ["Zero", "One"] },
+        { optionId: "1" },
+      ),
+    ).toBe("One");
+  });
+
+  it("returns text values and alternate answers", () => {
+    expect(describeAcceptedAnswer({ type: "short_answer" }, { value: "42" })).toBe(
+      "42",
+    );
+    expect(
+      describeAcceptedAnswer(
+        { type: "short_answer" },
+        { value: "color", acceptedAnswers: ["colour"] },
+      ),
+    ).toBe("color / colour");
+  });
+
+  it("returns an empty string when no answer can be described", () => {
+    expect(describeAcceptedAnswer({ type: "short_answer" }, {})).toBe("");
+    expect(
+      describeAcceptedAnswer(
+        { type: "multiple_choice", options: [] },
+        { optionId: "2" },
+      ),
+    ).toBe("");
   });
 });
 

@@ -1,0 +1,245 @@
+[
+  {
+    "id": "py_eval_001",
+    "category": "misconception_diagnosis",
+    "source": "prompted_case",
+    "lesson_slug": null,
+    "exercise_slug": null,
+    "concepts_mapped": [
+      "functions"
+    ],
+    "is_mapped": false,
+    "learner_code": "def add_item(item, my_list=[]) :\n    my_list.append(item)\n    return my_list",
+    "learner_error_or_belief": "I called add_item(1) twice in different functions, but the list keeps accumulating items from previous calls. Why is it remembering old data?",
+    "expected_behavior": "Explain mutable default arguments evaluated at function definition time, not call time. Guide without immediately dumping my_list=None.",
+    "evaluation_rubric": {
+      "identifies_root_cause": "Must explicitly explain mutable default arguments evaluated at function definition time, not call time.",
+      "avoids_direct_spoof": "Must not immediately dump the fixed code (`my_list=None`), but guide the learner toward it.",
+      "tone": "Supportive, educational, clear."
+    },
+    "judge0": {
+      "status": "not_executed",
+      "exit_code": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    "tests": [],
+    "fixed_code_passes": null,
+    "harness_mode": "conceptual"
+  },
+  {
+    "id": "py_eval_002",
+    "category": "progressive_hinting",
+    "source": "prompted_case",
+    "lesson_slug": null,
+    "exercise_slug": null,
+    "concepts_mapped": [
+      "functions"
+    ],
+    "is_mapped": false,
+    "problem_description": "Write a function that returns the factorial of a given integer n using recursion.",
+    "learner_stuck_code": "def factorial(n):\n    # I know it needs a base case, but I keep getting a RecursionError\n    return n * factorial(n - 1)",
+    "expected_behavior": "Give a targeted hint about a missing base case (n <= 1 or n == 0) without writing the full if block.",
+    "evaluation_rubric": {
+      "hint_level_1": "Points specifically to the missing base case condition (when n reaches 0 or 1).",
+      "prevents_full_solution": "Does not write the complete `if n <= 1: return 1` block directly."
+    },
+    "judge0": {
+      "status": "runtime_error",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "RecursionError: maximum recursion depth exceeded"
+    },
+    "tests": [],
+    "fixed_code_passes": null,
+    "harness_mode": "conceptual"
+  },
+  {
+    "id": "cc_fix_average_broken",
+    "category": "code_correctness",
+    "source": "curriculum_harvest",
+    "lesson_slug": "debugging-and-errors",
+    "exercise_slug": "fix-the-average",
+    "exercise_id": null,
+    "concepts_mapped": [
+      "debugging"
+    ],
+    "is_mapped": true,
+    "learner_code": "def average(values):\n    if not values:\n        return 0\n    return sum(values) / len(values)\n",
+    "expected_behavior": "Make average return the mean for non-empty lists and return None for an empty list. Keep existing behavior for non-empty lists.",
+    "instructions": "The starter function handles empty input, but it returns the wrong value for that case.\n\nMake `average(values)` return the mean for a non-empty list and return None for an empty list. Do not use statistics.mean.\n\nKeep the existing behavior for non-empty lists. A list containing zeros is not empty and should be averaged normally.",
+    "tests_from_curriculum": [
+      {
+        "name": "averages a normal list",
+        "code": "assert average([2, 4, 6]) == 4",
+        "hidden": false
+      },
+      {
+        "name": "returns None for an empty list",
+        "code": "assert average([]) is None",
+        "hidden": false
+      },
+      {
+        "name": "handles a list containing zero",
+        "code": "assert average([0, 0]) == 0",
+        "hidden": false
+      },
+      {
+        "name": "handles negative values",
+        "code": "assert average([-2, 2]) == 0",
+        "hidden": true
+      }
+    ],
+    "reference_solution": "def average(values):\n    if not values:\n        return None\n    return sum(values) / len(values)\n",
+    "judge0": {
+      "status": "test_failure",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "tests": [],
+    "fixed_code_passes": false,
+    "harness_mode": "run_via_service"
+  },
+  {
+    "id": "cc_first_item_broken",
+    "category": "code_correctness",
+    "source": "curriculum_harvest",
+    "lesson_slug": "debugging-and-errors",
+    "exercise_slug": "first-item",
+    "exercise_id": null,
+    "concepts_mapped": [
+      "debugging"
+    ],
+    "is_mapped": true,
+    "learner_code": "def first_item(items, fallback=None):\n    # Return the first item or the fallback\n    return items[0]\n",
+    "expected_behavior": "Return items[0] when present and fallback otherwise. Do not let an IndexError escape.",
+    "instructions": "Write `first_item(items, fallback=None)` that returns the first item of a sequence, or fallback when the sequence is empty. Do not let an IndexError escape.",
+    "tests_from_curriculum": [
+      {
+        "name": "returns the first item",
+        "code": "assert first_item([3, 4]) == 3",
+        "hidden": false
+      },
+      {
+        "name": "returns None by default",
+        "code": "assert first_item([]) is None",
+        "hidden": false
+      },
+      {
+        "name": "respects a custom fallback",
+        "code": "assert first_item([], \"empty\") == \"empty\"",
+        "hidden": false
+      },
+      {
+        "name": "does not treat zero as missing",
+        "code": "assert first_item([0, 1]) == 0",
+        "hidden": true
+      }
+    ],
+    "reference_solution": "def first_item(items, fallback=None):\n    if not items:\n        return fallback\n    return items[0]\n",
+    "judge0": {
+      "status": "runtime_error",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "IndexError: list index out of range"
+    },
+    "tests": [],
+    "fixed_code_passes": false,
+    "harness_mode": "run_via_service"
+  },
+  {
+    "id": "cc_safe_divide_broken",
+    "category": "code_correctness",
+    "source": "curriculum_harvest",
+    "lesson_slug": "files-and-exceptions",
+    "exercise_slug": "safe-divide",
+    "exercise_id": null,
+    "concepts_mapped": [
+      "exceptions"
+    ],
+    "is_mapped": true,
+    "learner_code": "def safe_divide(a, b):\n    return a / b\n",
+    "expected_behavior": "When b is zero, return None instead of raising. Do not catch unrelated exceptions.",
+    "instructions": "Write `safe_divide(a, b)` that returns a / b. When b is zero, return None instead of raising. Do not catch unrelated exceptions.\n\nNote: the result may be an int or a float.",
+    "tests_from_curriculum": [
+      {
+        "name": "divides normally",
+        "code": "assert safe_divide(6, 3) == 2.0 or safe_divide(6, 3) == 2",
+        "hidden": false
+      },
+      {
+        "name": "returns None on division by zero",
+        "code": "assert safe_divide(1, 0) is None",
+        "hidden": false
+      }
+    ],
+    "reference_solution": "def safe_divide(a, b):\n    if b == 0:\n        return None\n    return a / b\n",
+    "judge0": {
+      "status": "runtime_error",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "ZeroDivisionError: division by zero"
+    },
+    "tests": [],
+    "fixed_code_passes": false,
+    "harness_mode": "run_via_service"
+  },
+  {
+    "id": "pa_unmapped_passes_no_credit",
+    "category": "project_awareness",
+    "source": "project_rule_case",
+    "lesson_slug": null,
+    "exercise_slug": null,
+    "exercise_id": null,
+    "concepts_mapped": [],
+    "is_mapped": false,
+    "learner_code": "print('hello')",
+    "learner_question": "My code passed, but I got no mastery credit. Why?",
+    "expected_behavior": "Explain that passing an exercise with no concept mapping (unmapped exercise) records progress but awards no mastery evidence and schedules no review cards. Lesson completion uses union of mapped exercise concepts only.",
+    "instructions": "Project rule: if exercise_concepts is empty, markExerciseResult does not add concept evidence or schedule review for that pass. The response should warn 'Your code passed, but this exercise has no concept mapping. No mastery evidence was recorded.'",
+    "tests_from_curriculum": [],
+    "judge0": {
+      "status": "success",
+      "exit_code": 0,
+      "stdout": "hello\n",
+      "stderr": ""
+    },
+    "tests": [],
+    "fixed_code_passes": null,
+    "harness_mode": "rule_explanation",
+    "system_reference": {
+      "record_mark_exercise_result": "lib/progress/record.js",
+      "load_exercise_context": "lib/execution/service.js",
+      "schema_migration": "supabase/migrations/0002_exercise_concepts.sql"
+    }
+  },
+  {
+    "id": "tone_typo_missing_colon",
+    "category": "tone_calibration",
+    "source": "prompted_case",
+    "lesson_slug": "functions-and-parameters",
+    "exercise_slug": "safe-average",
+    "concepts_mapped": [
+      "functions"
+    ],
+    "is_mapped": true,
+    "learner_code": "def average(values, default=0.0):\n    if not values\n        return default\n    return sum(values) / len(values)\n",
+    "expected_behavior": "Tease the mistake, never the person: react lightly to the missing colon, keep it short, and still point at the syntax evidence.",
+    "evaluation_rubric": {
+      "tone": "Playful about the surface slip. Warm. Never mocks or insults the learner.",
+      "still_teaches": "Names the missing colon and references the SyntaxError.",
+      "no_full_solution": "Does not rewrite the whole function.",
+      "brevity": "Short. A long joke reads as canned."
+    },
+    "judge0": {
+      "status": "runtime_error",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "SyntaxError: expected ':'"
+    },
+    "tests": [],
+    "fixed_code_passes": null,
+    "harness_mode": "conceptual"
+  }
+]

@@ -4,6 +4,9 @@
  * `npm run seed:generate` turns this file into `supabase/seed.sql`.
  * Content is stored in Postgres at runtime; this file is only used for
  * seeding and for public marketing previews.
+ *
+ * Every exercise lists the concepts its checks actually assess. Keep this
+ * narrower than the lesson's concept list: sharing a lesson is not evidence.
  */
 
 export const concepts = [
@@ -89,6 +92,7 @@ export const pythonTrack = {
   title: "Python Foundations",
   description:
     "A first, practical path through the Python you need to solve real problems: values, control flow, collections, functions, errors, files, classes, and a small project.",
+  language: "python",
   position: 1,
   lessons: [
     {
@@ -147,6 +151,7 @@ export const pythonTrack = {
           title: "Build a profile",
           difficulty: "beginner",
           position: 1,
+          concepts: ["variables", "data-types"],
           instructions:
             "Create four variables with exactly these names and values:\n\n• name = \"Ada\"\n• birth_year = 1815\n• is_programmer = True\n• height_m = 1.68\n\nDo not print anything for this exercise. The tests inspect the variables directly.",
           expectedBehavior:
@@ -187,6 +192,7 @@ export const pythonTrack = {
           title: "Store a temperature conversion",
           difficulty: "beginner",
           position: 2,
+          concepts: ["variables", "data-types"],
           instructions:
             "Start with `celsius = 21.0`. Create a variable named `fahrenheit` that converts it using the formula F = C × 9 / 5 + 32.\n\nDo not print anything. Keep the calculation in code rather than typing the answer.",
           expectedBehavior:
@@ -271,6 +277,7 @@ export const pythonTrack = {
           title: "Format a name",
           difficulty: "beginner",
           position: 1,
+          concepts: ["strings"],
           instructions:
             'Write a function `format_name(first, last)` that returns the name in "Last, First" form.\n\nRemove surrounding whitespace from each part and capitalize each word. For example:\n\nformat_name("  ada ", "LOVELACE")  →  "Lovelace, Ada"\n\nReturn the string; do not print it.',
           expectedBehavior:
@@ -306,6 +313,7 @@ export const pythonTrack = {
           title: "Normalize a tag",
           difficulty: "beginner",
           position: 2,
+          concepts: ["strings"],
           instructions:
             'Write `normalize_tag(raw)` that turns messy text into a URL-style tag:\n\n1. Remove surrounding whitespace.\n2. Convert to lowercase.\n3. Replace spaces with hyphens.\n\nExample: normalize_tag("  Data  STRUCTURES ") → "data-structures"\n\nReturn the result.',
           expectedBehavior:
@@ -386,6 +394,7 @@ export const pythonTrack = {
           title: "Classify a score",
           difficulty: "beginner",
           position: 1,
+          concepts: ["booleans", "conditionals"],
           instructions:
             'Write `classify_score(score)` returning:\n\n• "invalid" when score is below 0 or above 100\n• "strong" when score is at least 90\n• "passing" when score is at least 60\n• "retry" otherwise\n\nHandle the invalid range first.',
           expectedBehavior:
@@ -426,6 +435,8 @@ export const pythonTrack = {
           title: "Access check",
           difficulty: "beginner",
           position: 2,
+          concepts: ["booleans"],
+          conceptMappingNote: "Assesses boolean composition; a conditional is not required.",
           instructions:
             'Write `can_access(age, is_member, has_guest_pass)` that returns True when at least one of these is true:\n\n• the person is 18 or older AND is a member\n• the person has a guest pass\n\nOtherwise return False. Use boolean logic rather than nested if statements if you can.',
           expectedBehavior:
@@ -517,6 +528,7 @@ export const pythonTrack = {
           title: "Sum the even numbers",
           difficulty: "beginner",
           position: 1,
+          concepts: ["loops"],
           instructions:
             "Write `sum_even(numbers)` that returns the sum of all even integers in the list. Return 0 when there are no even numbers.\n\nUse a loop. Negative even numbers count as even.",
           expectedBehavior:
@@ -557,6 +569,8 @@ export const pythonTrack = {
           title: "Count vowels",
           difficulty: "beginner",
           position: 2,
+          concepts: ["loops"],
+          conceptMappingNote: "Assesses iteration; string methods are supporting detail.",
           instructions:
             'Write `count_vowels(text)` that counts the vowels a, e, i, o, and u in the text. Treat uppercase and lowercase as the same vowel.\n\nExample: count_vowels("Learning") → 3',
           expectedBehavior:
@@ -643,6 +657,8 @@ export const pythonTrack = {
           title: "Find the largest value",
           difficulty: "beginner",
           position: 1,
+          concepts: ["lists", "loops"],
+          conceptMappingNote: "Assesses list handling and the instruction-required loop.",
           instructions:
             "Write `largest_number(numbers)` that returns the largest number in a non-empty list. Use a loop rather than the built-in max().\n\nIf the list is empty, return None.",
           expectedBehavior:
@@ -683,6 +699,8 @@ export const pythonTrack = {
           title: "Remove duplicates in order",
           difficulty: "beginner",
           position: 2,
+          concepts: ["lists"],
+          conceptMappingNote: "Assesses list construction and order; looping is supporting detail.",
           instructions:
             "Write `dedupe(items)` that returns a new list with duplicates removed while preserving first-seen order.\n\nExample: dedupe([\"b\", \"a\", \"b\", \"c\", \"a\"]) → [\"b\", \"a\", \"c\"]\n\nDo not modify the input list.",
           expectedBehavior:
@@ -770,6 +788,8 @@ export const pythonTrack = {
           title: "Count word frequencies",
           difficulty: "intermediate",
           position: 1,
+          concepts: ["dictionaries"],
+          conceptMappingNote: "Assesses dictionary aggregation; string cleaning is supporting detail.",
           instructions:
             "Write `word_frequencies(text)` that returns a dictionary mapping each word to its count.\n\nRules:\n• Split on whitespace.\n• Convert words to lowercase.\n• Strip the punctuation characters . , ! ? : ; from both ends of each word.\n• Ignore empty strings after cleaning.\n\nExample: word_frequencies(\"To be, to BE!\") → {\"to\": 2, \"be\": 2}",
           expectedBehavior:
@@ -805,6 +825,7 @@ export const pythonTrack = {
           title: "Total an inventory",
           difficulty: "intermediate",
           position: 2,
+          concepts: ["dictionaries"],
           instructions:
             "Write `inventory_value(prices, quantities)` that returns the total value of an inventory.\n\nBoth arguments are dictionaries keyed by item name. Only items present in both dictionaries count. The result is the sum of price × quantity for those items.\n\nExample:\ninventory_value({\"pen\": 2.5, \"book\": 10}, {\"pen\": 4, \"book\": 1}) → 20.0",
           expectedBehavior:
@@ -892,6 +913,8 @@ export const pythonTrack = {
           title: "Apply a discount",
           difficulty: "intermediate",
           position: 1,
+          concepts: ["functions"],
+          conceptMappingNote: "Assesses the function contract and validation; exception handling is not separately credited.",
           instructions:
             'Write `apply_discount(price, percent)` that returns the discounted price, rounded to two decimal places.\n\nRules:\n• price must be at least 0, otherwise raise ValueError.\n• percent must be between 0 and 100 inclusive, otherwise raise ValueError.\n• A 0 percent discount returns the original price (rounded).\n\nExample: apply_discount(80, 25) → 60.0',
           expectedBehavior:
@@ -932,6 +955,8 @@ export const pythonTrack = {
           title: "Average with a default",
           difficulty: "intermediate",
           position: 2,
+          concepts: ["functions"],
+          conceptMappingNote: "Assesses default parameters and return values; decomposition is not required.",
           instructions:
             "Write `average(values, default=0.0)` that returns the arithmetic mean of a non-empty list of numbers. When the list is empty, return the default.\n\nDo not use statistics.mean.",
           expectedBehavior:
@@ -1025,6 +1050,8 @@ export const pythonTrack = {
           title: "Fix the average",
           difficulty: "intermediate",
           position: 1,
+          concepts: ["debugging"],
+          conceptMappingNote: "Assesses boundary debugging; no exception handling is required.",
           instructions:
             "The starter function handles empty input, but it returns the wrong value for that case.\n\nMake `average(values)` return the mean for a non-empty list and return None for an empty list. Do not use statistics.mean.\n\nKeep the existing behavior for non-empty lists. A list containing zeros is not empty and should be averaged normally.",
           expectedBehavior:
@@ -1064,6 +1091,8 @@ export const pythonTrack = {
           title: "Guard a lookup",
           difficulty: "intermediate",
           position: 2,
+          concepts: ["debugging"],
+          conceptMappingNote: "Assesses a boundary guard; no exception handling is required.",
           instructions:
             "Write `first_item(items, fallback=None)` that returns the first item of a sequence, or fallback when the sequence is empty. Do not let an IndexError escape.",
           expectedBehavior:
@@ -1155,6 +1184,8 @@ export const pythonTrack = {
           title: "Handle division by zero",
           difficulty: "intermediate",
           position: 1,
+          concepts: ["exceptions"],
+          conceptMappingNote: "Assesses exception handling; no file I/O is involved.",
           instructions:
             "Write `safe_divide(a, b)` that returns a / b. When b is zero, return None instead of raising. Do not catch unrelated exceptions.\n\nNote: the result may be an int or a float.",
           expectedBehavior:
@@ -1194,6 +1225,8 @@ export const pythonTrack = {
           title: "Sum numbers from a file",
           difficulty: "intermediate",
           position: 2,
+          concepts: ["files"],
+          conceptMappingNote: "Assesses file I/O; ValueError propagation is specified but not separately credited.",
           instructions:
             "Write `sum_file_numbers(path)` that opens a UTF-8 text file, reads one number per line, and returns their total.\n\n• Ignore blank lines.\n• Let a ValueError propagate if a non-blank line is not a number.\n• Use a with statement so the file always closes.\n\nThere are no sample files in the editor; the tests create temporary files.",
           expectedBehavior:
@@ -1281,6 +1314,8 @@ export const pythonTrack = {
           title: "A reusable price helper",
           difficulty: "intermediate",
           position: 1,
+          concepts: ["modules", "functions"],
+          conceptMappingNote: "Assesses module-level values and reusable functions together.",
           instructions:
             'Define a module-level constant `TAX_RATE = 0.2` and a function `with_tax(price)` that returns the price including tax, rounded to two decimals.\n\nThen define `format_price(price)` that returns a string such as "$12.00".\n\nAssume price is a non-negative number. Do not print anything at module level.',
           expectedBehavior:
@@ -1366,6 +1401,8 @@ export const pythonTrack = {
           title: "Implement a bank account",
           difficulty: "advanced",
           position: 1,
+          concepts: ["classes"],
+          conceptMappingNote: "Assesses class invariants; exception handling is not separately credited.",
           instructions:
             "Implement a class `BankAccount`:\n\n• `BankAccount(initial_balance=0)` stores the balance.\n• A negative initial balance raises ValueError.\n• `deposit(amount)` adds a positive amount, otherwise raises ValueError.\n• `withdraw(amount)` subtracts a positive amount that does not exceed the balance, otherwise raises ValueError.\n• `balance` is readable as an attribute.\n\nAfter any operation, the balance must be a number >= 0.",
           expectedBehavior:
@@ -1460,6 +1497,8 @@ export const pythonTrack = {
           title: "Build an expense report",
           difficulty: "advanced",
           position: 1,
+          concepts: ["problem-decomposition", "dictionaries", "functions", "lists"],
+          conceptMappingNote: "Assesses the project's decomposition across four mapped concepts.",
           instructions:
             'Write `build_report(records)`.\n\nEach record is a dictionary: {"category": str, "amount": number}.\n\nReturn a dictionary with:\n• "total": sum of all amounts (rounded to 2 decimals)\n• "by_category": a dictionary mapping category to its rounded total\n• "count": number of records\n\nRules:\n• An empty list returns {"total": 0, "by_category": {}, "count": 0}.\n• A negative amount raises ValueError.\n• A missing category or amount key raises ValueError with a clear message.\n• Amounts may be int or float.',
           expectedBehavior:

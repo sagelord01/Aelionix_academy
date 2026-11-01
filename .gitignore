@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# fine-tuning artifacts (adapters and checkpoints stay out of git)
+/data/models/
+*.safetensors
+
+# python bytecode from the training scripts
+__pycache__/
+*.pyc

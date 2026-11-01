@@ -476,6 +476,18 @@ on conflict (id) do update set
   is_hidden = excluded.is_hidden,
   position = excluded.position;
 
+delete from public.exercise_concepts where exercise_id = '6baefe34-4422-4ce6-a441-42c0b095ffea';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('6baefe34-4422-4ce6-a441-42c0b095ffea', 'fd29c5a7-095f-48d0-a48c-ed779ef2083d', 1)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('6baefe34-4422-4ce6-a441-42c0b095ffea', '796e6405-b985-4fe0-aca9-60ea26f6360c', 2)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
 values ('cc2fe1c3-88e3-4af7-ae67-3da9867253d9', 'bce0f9e6-5a52-470b-a29f-4edfd4b91ca0', 'temperature-conversion', 'Store a temperature conversion', 'Start with `celsius = 21.0`. Create a variable named `fahrenheit` that converts it using the formula F = C × 9 / 5 + 32.
 
@@ -519,6 +531,18 @@ on conflict (id) do update set
   name = excluded.name,
   code = excluded.code,
   is_hidden = excluded.is_hidden,
+  position = excluded.position;
+
+delete from public.exercise_concepts where exercise_id = 'cc2fe1c3-88e3-4af7-ae67-3da9867253d9';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('cc2fe1c3-88e3-4af7-ae67-3da9867253d9', 'fd29c5a7-095f-48d0-a48c-ed779ef2083d', 1)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('cc2fe1c3-88e3-4af7-ae67-3da9867253d9', '796e6405-b985-4fe0-aca9-60ea26f6360c', 2)
+on conflict (exercise_id, concept_id) do update set
   position = excluded.position;
 
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
@@ -571,6 +595,13 @@ on conflict (id) do update set
   is_hidden = excluded.is_hidden,
   position = excluded.position;
 
+delete from public.exercise_concepts where exercise_id = '3f1f37e2-fff9-44dd-a629-344cba141226';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('3f1f37e2-fff9-44dd-a629-344cba141226', '15863477-72a0-48ee-aef3-52ba99a298e8', 1)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
 values ('adbeec0e-4219-48b4-a97b-24c959038bcd', 'acb595d7-aaa3-47ea-a3c8-37b48676bc8b', 'normalize-a-tag', 'Normalize a tag', 'Write `normalize_tag(raw)` that turns messy text into a URL-style tag:
 
@@ -621,6 +652,13 @@ on conflict (id) do update set
   name = excluded.name,
   code = excluded.code,
   is_hidden = excluded.is_hidden,
+  position = excluded.position;
+
+delete from public.exercise_concepts where exercise_id = 'adbeec0e-4219-48b4-a97b-24c959038bcd';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('adbeec0e-4219-48b4-a97b-24c959038bcd', '15863477-72a0-48ee-aef3-52ba99a298e8', 1)
+on conflict (exercise_id, concept_id) do update set
   position = excluded.position;
 
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
@@ -685,6 +723,18 @@ on conflict (id) do update set
   is_hidden = excluded.is_hidden,
   position = excluded.position;
 
+delete from public.exercise_concepts where exercise_id = '1c38818c-9d61-42cc-a3c8-1380994eae10';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('1c38818c-9d61-42cc-a3c8-1380994eae10', '5c5cbac5-7888-4bf4-a6a3-b0a529929d46', 1)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('1c38818c-9d61-42cc-a3c8-1380994eae10', '95d44d41-25ce-4825-a758-8accafc78053', 2)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
 values ('bec04c10-8412-4380-ac96-0914815fa8dd', '4618483d-b6cb-467f-a8a6-85f26fa3552e', 'can-access', 'Access check', 'Write `can_access(age, is_member, has_guest_pass)` that returns True when at least one of these is true:
 
@@ -741,6 +791,13 @@ on conflict (id) do update set
   name = excluded.name,
   code = excluded.code,
   is_hidden = excluded.is_hidden,
+  position = excluded.position;
+
+delete from public.exercise_concepts where exercise_id = 'bec04c10-8412-4380-ac96-0914815fa8dd';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('bec04c10-8412-4380-ac96-0914815fa8dd', '5c5cbac5-7888-4bf4-a6a3-b0a529929d46', 1)
+on conflict (exercise_id, concept_id) do update set
   position = excluded.position;
 
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
@@ -801,6 +858,13 @@ on conflict (id) do update set
   is_hidden = excluded.is_hidden,
   position = excluded.position;
 
+delete from public.exercise_concepts where exercise_id = '490c22e3-633d-419c-a48d-2335b371780e';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('490c22e3-633d-419c-a48d-2335b371780e', 'b5dce5f2-bb67-438f-a003-b485b8aab1d4', 1)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
 values ('cae83913-88a1-4d24-ab0a-9cc7f877863c', '281535d4-ebf5-427d-a0f1-d1030f415b66', 'count-vowels', 'Count vowels', 'Write `count_vowels(text)` that counts the vowels a, e, i, o, and u in the text. Treat uppercase and lowercase as the same vowel.
 
@@ -846,6 +910,13 @@ on conflict (id) do update set
   name = excluded.name,
   code = excluded.code,
   is_hidden = excluded.is_hidden,
+  position = excluded.position;
+
+delete from public.exercise_concepts where exercise_id = 'cae83913-88a1-4d24-ab0a-9cc7f877863c';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('cae83913-88a1-4d24-ab0a-9cc7f877863c', 'b5dce5f2-bb67-438f-a003-b485b8aab1d4', 1)
+on conflict (exercise_id, concept_id) do update set
   position = excluded.position;
 
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
@@ -906,6 +977,18 @@ on conflict (id) do update set
   is_hidden = excluded.is_hidden,
   position = excluded.position;
 
+delete from public.exercise_concepts where exercise_id = 'e8c169d5-8bf9-4663-a627-19095f1615cf';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('e8c169d5-8bf9-4663-a627-19095f1615cf', '89e3145d-0c46-4229-af0e-10d41abd95d9', 1)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('e8c169d5-8bf9-4663-a627-19095f1615cf', 'b5dce5f2-bb67-438f-a003-b485b8aab1d4', 2)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
 values ('10a36e62-0b43-4cb5-acdd-60c617b3ba68', 'c2362d34-d7c7-4c8e-a92d-5625a91cfeb4', 'remove-duplicates', 'Remove duplicates in order', 'Write `dedupe(items)` that returns a new list with duplicates removed while preserving first-seen order.
 
@@ -955,6 +1038,13 @@ on conflict (id) do update set
   name = excluded.name,
   code = excluded.code,
   is_hidden = excluded.is_hidden,
+  position = excluded.position;
+
+delete from public.exercise_concepts where exercise_id = '10a36e62-0b43-4cb5-acdd-60c617b3ba68';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('10a36e62-0b43-4cb5-acdd-60c617b3ba68', '89e3145d-0c46-4229-af0e-10d41abd95d9', 1)
+on conflict (exercise_id, concept_id) do update set
   position = excluded.position;
 
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
@@ -1010,6 +1100,13 @@ on conflict (id) do update set
   is_hidden = excluded.is_hidden,
   position = excluded.position;
 
+delete from public.exercise_concepts where exercise_id = '8db48eb4-4b0e-4636-ac0a-f2e31160c195';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('8db48eb4-4b0e-4636-ac0a-f2e31160c195', '4439b869-7b93-4062-a770-6ce19c80a8e0', 1)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
 values ('2ad59ba7-748a-4329-a23b-dc0b1abb7199', '67bf3a61-9afb-436c-a3c0-7759b3bba087', 'inventory-total', 'Total an inventory', 'Write `inventory_value(prices, quantities)` that returns the total value of an inventory.
 
@@ -1058,6 +1155,13 @@ on conflict (id) do update set
   name = excluded.name,
   code = excluded.code,
   is_hidden = excluded.is_hidden,
+  position = excluded.position;
+
+delete from public.exercise_concepts where exercise_id = '2ad59ba7-748a-4329-a23b-dc0b1abb7199';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('2ad59ba7-748a-4329-a23b-dc0b1abb7199', '4439b869-7b93-4062-a770-6ce19c80a8e0', 1)
+on conflict (exercise_id, concept_id) do update set
   position = excluded.position;
 
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
@@ -1131,6 +1235,13 @@ on conflict (id) do update set
   is_hidden = excluded.is_hidden,
   position = excluded.position;
 
+delete from public.exercise_concepts where exercise_id = '061a62c0-dcaa-4ba0-a17e-764288c1874b';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('061a62c0-dcaa-4ba0-a17e-764288c1874b', '83a30906-352f-48fe-aab0-cd07615faa62', 1)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
 values ('49b07774-3c49-4c91-a2ed-df2c13b0b4a4', 'ed6304a1-7bc0-4fa3-a972-cf3918777b83', 'safe-average', 'Average with a default', 'Write `average(values, default=0.0)` that returns the arithmetic mean of a non-empty list of numbers. When the list is empty, return the default.
 
@@ -1184,6 +1295,13 @@ on conflict (id) do update set
   name = excluded.name,
   code = excluded.code,
   is_hidden = excluded.is_hidden,
+  position = excluded.position;
+
+delete from public.exercise_concepts where exercise_id = '49b07774-3c49-4c91-a2ed-df2c13b0b4a4';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('49b07774-3c49-4c91-a2ed-df2c13b0b4a4', '83a30906-352f-48fe-aab0-cd07615faa62', 1)
+on conflict (exercise_id, concept_id) do update set
   position = excluded.position;
 
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
@@ -1244,6 +1362,13 @@ on conflict (id) do update set
   is_hidden = excluded.is_hidden,
   position = excluded.position;
 
+delete from public.exercise_concepts where exercise_id = 'a7c69604-0e3e-4d77-a169-7ea1d7c05244';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('a7c69604-0e3e-4d77-a169-7ea1d7c05244', 'fdaa6425-f783-457a-a506-6c11b99f9ce4', 1)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
 values ('81f41ad6-7734-4054-ae56-450ba68f30f0', '5d287952-9301-4c55-a6ce-3f01c0000de3', 'first-item', 'Guard a lookup', 'Write `first_item(items, fallback=None)` that returns the first item of a sequence, or fallback when the sequence is empty. Do not let an IndexError escape.', 'Returns items[0] when present and fallback otherwise.', 'def first_item(items, fallback=None):
     # Return the first item or the fallback
@@ -1295,6 +1420,13 @@ on conflict (id) do update set
   name = excluded.name,
   code = excluded.code,
   is_hidden = excluded.is_hidden,
+  position = excluded.position;
+
+delete from public.exercise_concepts where exercise_id = '81f41ad6-7734-4054-ae56-450ba68f30f0';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('81f41ad6-7734-4054-ae56-450ba68f30f0', 'fdaa6425-f783-457a-a506-6c11b99f9ce4', 1)
+on conflict (exercise_id, concept_id) do update set
   position = excluded.position;
 
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
@@ -1355,6 +1487,13 @@ on conflict (id) do update set
   name = excluded.name,
   code = excluded.code,
   is_hidden = excluded.is_hidden,
+  position = excluded.position;
+
+delete from public.exercise_concepts where exercise_id = '27636bd0-a048-4db1-a96d-b2127d4b8c7d';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('27636bd0-a048-4db1-a96d-b2127d4b8c7d', 'fec22fe5-afad-48a0-aaf5-da6070acbcb2', 1)
+on conflict (exercise_id, concept_id) do update set
   position = excluded.position;
 
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
@@ -1436,6 +1575,13 @@ on conflict (id) do update set
   is_hidden = excluded.is_hidden,
   position = excluded.position;
 
+delete from public.exercise_concepts where exercise_id = '801aacf4-d612-42e3-a36c-0e406d684cce';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('801aacf4-d612-42e3-a36c-0e406d684cce', '0a9f7cf4-7ec9-4312-a3f1-804e979dd1d6', 1)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
 values ('ac2bcfda-1833-4fc4-a379-e83821fede98', '0451353f-1753-41c9-ac89-6d4ba76e9d3d', 'price-helper', 'A reusable price helper', 'Define a module-level constant `TAX_RATE = 0.2` and a function `with_tax(price)` that returns the price including tax, rounded to two decimals.
 
@@ -1493,6 +1639,18 @@ on conflict (id) do update set
   name = excluded.name,
   code = excluded.code,
   is_hidden = excluded.is_hidden,
+  position = excluded.position;
+
+delete from public.exercise_concepts where exercise_id = 'ac2bcfda-1833-4fc4-a379-e83821fede98';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('ac2bcfda-1833-4fc4-a379-e83821fede98', '6f6d56e8-d360-4628-a515-33ac6b613795', 1)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('ac2bcfda-1833-4fc4-a379-e83821fede98', '83a30906-352f-48fe-aab0-cd07615faa62', 2)
+on conflict (exercise_id, concept_id) do update set
   position = excluded.position;
 
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
@@ -1595,6 +1753,13 @@ on conflict (id) do update set
   is_hidden = excluded.is_hidden,
   position = excluded.position;
 
+delete from public.exercise_concepts where exercise_id = '0af16149-08df-44ad-a536-3f8de6a912af';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('0af16149-08df-44ad-a536-3f8de6a912af', 'dd82d416-d940-4add-aab2-5184e9cd8d83', 1)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
 insert into public.exercises (id, lesson_id, slug, title, instructions, expected_behavior, starter_code, language, difficulty, position, hints, is_published)
 values ('d612c1cc-692e-477a-a774-4a7fd997a91e', 'f043ae36-28e5-4c58-a3b0-24275eea8039', 'expense-report', 'Build an expense report', 'Write `build_report(records)`.
 
@@ -1673,6 +1838,28 @@ on conflict (id) do update set
   name = excluded.name,
   code = excluded.code,
   is_hidden = excluded.is_hidden,
+  position = excluded.position;
+
+delete from public.exercise_concepts where exercise_id = 'd612c1cc-692e-477a-a774-4a7fd997a91e';
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('d612c1cc-692e-477a-a774-4a7fd997a91e', '7d430c90-b7ee-4329-a6b0-99d5c1877d69', 1)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('d612c1cc-692e-477a-a774-4a7fd997a91e', '4439b869-7b93-4062-a770-6ce19c80a8e0', 2)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('d612c1cc-692e-477a-a774-4a7fd997a91e', '83a30906-352f-48fe-aab0-cd07615faa62', 3)
+on conflict (exercise_id, concept_id) do update set
+  position = excluded.position;
+
+insert into public.exercise_concepts (exercise_id, concept_id, position)
+values ('d612c1cc-692e-477a-a774-4a7fd997a91e', '89e3145d-0c46-4229-af0e-10d41abd95d9', 4)
+on conflict (exercise_id, concept_id) do update set
   position = excluded.position;
 
 insert into public.assessment_definitions (id, slug, title, description, is_published)
