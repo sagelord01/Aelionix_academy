@@ -13,6 +13,7 @@
     "traces:build": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-training-traces.mjs",
     "traces:validate": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/validate-training-traces.mjs",
     "traces:export-google": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/export-google-ai-studio.mjs",
+    "notebook:build": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/create-colab-notebook.mjs",
     "bench:eval-prompts": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-eval-prompts.mjs"
   },
   "dependencies": {
